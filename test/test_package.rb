@@ -1,5 +1,6 @@
 require 'test/unit'
 require 'ALD/package'
+require 'zip'
 
 class PackageTest < Test::Unit::TestCase
   BASE_PATH = "test/data/archives"
@@ -11,10 +12,17 @@ class PackageTest < Test::Unit::TestCase
   end
 
   def test_valid
-    package = nil
     assert_nothing_raised "Unexpected error when opening valid package" do
       package = ALD::Package.open("#{BASE_PATH}/valid.zip")
+      package.close
     end
-    package.close
+  end
+
+  def test_from_zip
+    zip = Zip::File.open("#{BASE_PATH}/valid.zip")
+    assert_nothing_raised "Unexpected error when opening from Zip::File object" do
+      package = ALD::Package.open(zip)
+      package.close
+    end
   end
 end
