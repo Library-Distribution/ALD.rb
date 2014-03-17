@@ -6,7 +6,7 @@ class PackageTest < Test::Unit::TestCase
 
   def test_no_definition
     assert_raise ALD::NoDefinitionError, "Failed to recognize package without definition as invalid" do
-      ALD::Package.open("#{BASE_PATH}/no_definition.ald")
+      ALD::Package.open("#{BASE_PATH}/no_definition.zip")
     end
   end
 end

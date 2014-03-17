@@ -11,6 +11,6 @@ task :archive do
   Dir["test/data/archives/*.ald"].each { |f| File.delete f }
 
   Dir["test/data/archives/*"].select { |f| File.directory? f }.each do |dir|
-    sh "cd #{dir} && zip -r ../#{File.basename(dir)}.ald *"
+    sh "cd #{dir} && zip -r ../#{File.basename(dir)}.zip *"
   end
 end
