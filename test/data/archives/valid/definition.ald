@@ -1,0 +1,15 @@
+<ald:package xmlns:ald='ald://package/schema/2012' ald:id='7fa97a01c5e94ab69be4e0fe6c93a39e' ald:type='lib' ald:name='valid-lib' ald:version='1.0.0'>
+	<ald:summary>Some ALD item</ald:summary>
+	<ald:summary>Some ALD item for testing</ald:summary>
+	<ald:authors>
+		<ald:author ald:name="Oscar"/>
+	</ald:authors>
+	<ald:files>
+		<ald:doc />
+		<ald:src />
+	</ald:files>
+	<ald:tags>
+		<ald:tag ald:name="my_tag"/>
+	</ald:tags>
+	<ald:links />
+</ald:package>

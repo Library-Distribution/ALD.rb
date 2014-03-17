@@ -9,4 +9,12 @@ class PackageTest < Test::Unit::TestCase
       ALD::Package.open("#{BASE_PATH}/no_definition.zip")
     end
   end
+
+  def test_valid
+    package = nil
+    assert_nothing_raised "Unexpected error when opening valid package" do
+      package = ALD::Package.open("#{BASE_PATH}/valid.zip")
+    end
+    package.close
+  end
 end
