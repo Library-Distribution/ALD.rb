@@ -9,6 +9,6 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/Library-Distribution/ALD.rb'
   s.license = 'MIT'
 
-  s.add_runtime_dependency 'rubyzip'
+  s.add_runtime_dependency 'rubyzip', '~> 1.1'
   s.add_development_dependency 'rake'
 end
