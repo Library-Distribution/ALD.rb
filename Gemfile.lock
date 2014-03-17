@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     ALD (0.0.0)
-      rubyzip
+      rubyzip (~> 1.1)
 
 GEM
   remote: https://rubygems.org/
