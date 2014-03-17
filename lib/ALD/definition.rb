@@ -31,6 +31,14 @@ module ALD
       raise InvalidDefinitionError unless valid?
     end
 
+    def description
+      REXML::XPath.match(document.root, "//ald:description", 'ald' => XML_NAMESPACE)[0].text
+    end
+
+    def tags
+      REXML::XPath.match(document.root, "//ald:tags/ald:tag/@ald:name", 'ald' => XML_NAMESPACE).map { |tag| tag.value }
+    end
+
     def self.create!(generator)
     end
 
