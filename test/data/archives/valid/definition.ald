@@ -1,5 +1,5 @@
 <ald:package xmlns:ald='ald://package/schema/2012' ald:id='7fa97a01c5e94ab69be4e0fe6c93a39e' ald:type='lib' ald:name='valid-lib' ald:version='1.0.0' ald:summary='Some ALD item'>
-	<ald:description>Some ALD item for testing</ald:description>
+	<ald:description>Some ALD item for testing &gt;&gt;&gt;</ald:description>
 	<ald:authors>
 		<ald:author ald:name="Oscar"/>
 	</ald:authors>
