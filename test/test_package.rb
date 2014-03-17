@@ -1,3 +1,4 @@
+require 'helper'
 require 'test/unit'
 require 'ALD'
 require 'zip'
