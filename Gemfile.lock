@@ -1,0 +1,18 @@
+PATH
+  remote: .
+  specs:
+    ALD (0.0.0)
+      rubyzip
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    rake (10.1.0)
+    rubyzip (1.1.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  ALD!
+  rake
