@@ -30,7 +30,7 @@ module ALD
       end
 
       @definition = Definition.new(def_entry.get_input_stream)
-      unless valid?(@archive, @definition)
+      unless Package.valid?(@archive, @definition)
         raise InvalidPackageError, 'The given ZIP file ' + (file.is_a? Zip::File ? '' : "'#{file}' ") + 'is not a valid ALD archive!'
       end
 
