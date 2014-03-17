@@ -25,14 +25,10 @@ module ALD
       end
 
       def_entry = @archive.find_entry('definition.ald')
-      if def_entry.nil?
-        raise NoDefinitionError
-      end
+      raise NoDefinitionError if def_entry.nil?
 
       @definition = Definition.new(def_entry.get_input_stream)
-      unless Package.valid?(@archive, @definition)
-        raise InvalidPackageError, 'The given ZIP file ' + (file.is_a? Zip::File ? '' : "'#{file}' ") + 'is not a valid ALD archive!'
-      end
+      raise InvalidPackageError, 'The given ZIP file is not a valid ALD archive!' unless Package.valid?(@archive, @definition)
 
       # file access
     end
@@ -53,9 +49,7 @@ module ALD
         raise IOError, "Destination '#{path}' already exists!"
       end
 
-      unless generator.valid?
-        raise InvalidPackageError
-      end
+      raise InvalidPackageError unless generator.valid?
 
       archive = Zip::File.open(path, Zip::File::CREATE)
 

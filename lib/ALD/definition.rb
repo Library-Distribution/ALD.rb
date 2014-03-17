@@ -11,9 +11,8 @@ module ALD
       else
         @document = REXML::Document.new(source)
       end
-      unless valid?
-        raise InvalidDefinitionError
-      end
+
+      raise InvalidDefinitionError unless valid?
     end
 
     def self.create!(generator)
