@@ -3,8 +3,13 @@ require 'ALD/exceptions'
 
 module ALD
   class Definition
+    SCHEMA_FILE = "#{File.dirname(__FILE__)}/schema.xsd"
 
     XML_NAMESPACE = 'ald://package/schema/2014'
+
+    def self.schema
+      @schema ||= Nokogiri::XML::Schema(File.read(SCHEMA_FILE))
+    end
 
     TOPLEVEL_ATTRIBUTES = %w[
       id
@@ -39,7 +44,7 @@ module ALD
     end
 
     def valid?
-      true
+      Definition.schema.valid?(@document)
     end
 
     def to_s
