@@ -36,7 +36,7 @@ module ALD
         archive = Zip::File.open(path, Zip::File::CREATE)
 
         archive.get_output_stream('definition.ald') do |s|
-          definition.document.write(s)
+          s << definition.to_s
         end
 
         files.each do |path, src|

@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     ALD (0.0.0)
+      nokogiri (~> 1.6)
       rubyzip (~> 1.1)
 
 GEM
@@ -14,7 +15,10 @@ GEM
       term-ansicolor
       thor
     mime-types (1.25)
+    mini_portile (0.5.2)
     multi_json (1.8.1)
+    nokogiri (1.6.1)
+      mini_portile (~> 0.5.0)
     rake (10.1.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
