@@ -4,7 +4,7 @@ require 'ALD/exceptions'
 module ALD
   class Definition
 
-    XML_NAMESPACE = 'ald://package/schema/2012'
+    XML_NAMESPACE = 'ald://package/schema/2014'
 
     TOPLEVEL_ATTRIBUTES = %w[
       id
