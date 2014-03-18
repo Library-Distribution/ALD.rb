@@ -1,0 +1,340 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			xmlns:ald="ald://package/schema/2014"
+			attributeFormDefault="qualified" elementFormDefault="qualified"
+			targetNamespace="ald://package/schema/2014">
+
+	<xsd:simpleType name="guid-type"> <!-- defines the type of a GUID -->
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[a-fA-F0-9]{32}"/> <!-- update: do not use any format, just the raw number -->
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="internetURL">
+		<xsd:restriction base="xsd:anyURI">
+			<xsd:pattern value="https?://.*"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="schemaURL">
+		<xsd:restriction base="xsd:anyURI">
+			<xsd:pattern value="(https?|ald)://.*"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="word-string">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="(\w|_)+"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="architecture">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="x32"/>
+			<xsd:enumeration value="x64"/>
+			<xsd:enumeration value="x128"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="encoding">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ANSI"/>
+			<xsd:enumeration value="Unicode"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="access">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="read"/>
+			<xsd:enumeration value="write"/>
+			<xsd:enumeration value="read+write"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<!-- I. VERSIONING -->
+	<!-- a. semantic versioning -->
+	<xsd:simpleType name="semverType">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="(\d+)\.(\d+)\.(\d+)(\-([0-9A-Za-z\-]+\.)*([0-9A-Za-z\-]+))?(\+([0-9A-Za-z\-]+\.)*([0-9A-Za-z\-]+))?"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="semanticVersion"> <!-- defines a version of a dependency -->
+		<xsd:sequence>
+			<xsd:element name="customdata" type="ald:customDataType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+
+		<xsd:attribute use="required" name="value" type="ald:semverType"/>
+	</xsd:complexType>
+
+	<xsd:group name="semantic-version-switch"> <!-- defines several ways to validate a version -->
+		<xsd:choice>
+			<xsd:element name="version" type="ald:semanticVersion"/> <!-- the only accepted version number -->
+			<xsd:element name="version-list"> <!-- a list of accepted version numbers -->
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="version" type="ald:semanticVersion" minOccurs="1" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="version-range"> <!-- a range of accepted version numbers -->
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="customdata" type="ald:customDataType" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence>
+
+					<xsd:attribute use="required" type="ald:semverType" name="min-version"/> <!-- the lower bound of a range of accepted version numbers for the item. -->
+					<xsd:attribute use="required" type="ald:semverType" name="max-version"/> <!-- the upper bound of a range of accepted version numbers for the item. -->
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:choice>
+	</xsd:group>
+
+	<!-- b. lax versioning -->
+	<!-- defines a version of a requirement -->
+	<xsd:complexType name="laxVersion">
+		<xsd:sequence>
+			<xsd:element name="customdata" type="ald:customDataType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+
+		<xsd:attribute use="required" type="xsd:string" name="value"/> <!-- carries the version number -->
+	</xsd:complexType>
+
+	<xsd:group name="version-switch"> <!-- defines several ways to validate a version -->
+		<xsd:choice>
+			<xsd:element name="version" type="ald:laxVersion"/> <!-- the only accepted version number -->
+			<xsd:element name="version-list"> <!-- a list of accepted version numbers -->
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="version" type="ald:laxVersion" minOccurs="1" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="version-range"> <!-- a range of accepted version numbers -->
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="customdata" type="ald:customDataType" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence>
+
+					<xsd:attribute use="required" type="xsd:string" name="min-version"/> <!-- the lower bound of a range of accepted version numbers for the item. -->
+					<xsd:attribute use="required" type="xsd:string" name="max-version"/> <!-- the upper bound of a range of accepted version numbers for the item. -->
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:choice>
+	</xsd:group>
+	<!-- END OF VERSIONING -->
+
+	<!-- defines data of an author who wrote this item -->
+	<xsd:complexType name="authorType">
+		<xsd:sequence>
+			<xsd:element name="customdata" type="ald:customDataType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+
+		<xsd:attribute use="required" type="xsd:string" name="name"/> <!-- the name to identify the author. Can be same as user-name -->
+		<xsd:attribute use="optional" type="xsd:string" name="user-name"/> <!-- the AHK forums user name -->
+		<xsd:attribute use="optional" type="ald:internetURL" name="homepage"/> <!-- an URL to a homepage of the author -->
+		<xsd:attribute use="optional" type="xsd:string" name="email"/> <!-- an email address of the author -->
+		<xsd:anyAttribute/>
+	</xsd:complexType>
+
+	<!-- defines a library required for this item to work -->
+	<xsd:complexType name="dependencyType">
+		<xsd:sequence>
+			<xsd:group ref="ald:semantic-version-switch" minOccurs="1" maxOccurs="1"/> <!-- defines the version(s) of this dependency that are accepted -->
+		</xsd:sequence>
+
+		<xsd:attribute use="required" type="xsd:string" name="name"/> <!-- the name of the required item -->
+		<xsd:anyAttribute/>
+	</xsd:complexType>
+
+	<!-- specifies that the item can run on the given system -->
+	<xsd:complexType name="targetType">
+		<xsd:sequence>
+			<xsd:element name="language-version" minOccurs="0" maxOccurs="1">
+				<xsd:complexType>
+					<xsd:group ref="ald:version-switch" minOccurs="1" maxOccurs="1"/>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="target" type="ald:targetType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+
+		<xsd:attribute use="optional" type="xsd:string" name="message"/>
+		<xsd:attribute use="optional" type="xsd:NCName" name="id"/>
+
+		<xsd:attribute use="optional" type="ald:architecture" name="language-architecture"/>
+		<xsd:attribute use="optional" type="ald:encoding" name="language-encoding"/>
+		<xsd:attribute use="optional" type="ald:architecture" name="system-architecture"/>
+		<xsd:attribute use="optional" type="xsd:string" name="system-version"/>
+		<xsd:attribute use="optional" type="xsd:string" name="system-type"/>
+
+		<xsd:anyAttribute/>
+	</xsd:complexType>
+
+	<!-- specifies different files for different platforms -->
+	<xsd:complexType name="fileSetType">
+		<xsd:sequence>
+			<xsd:choice minOccurs="1" maxOccurs="unbounded">
+				<xsd:element name="file" type="ald:fileType"/>
+				<xsd:element name="file-set" type="ald:fileSetType"/>
+			</xsd:choice>
+			<xsd:element name="target" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:attribute use="required" type="xsd:NCName" name="ref"/>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+
+		<xsd:attribute use="required" type="xsd:string" name="src"/>
+		<xsd:anyAttribute/>
+	</xsd:complexType>
+
+	<!-- defines a file being included -->
+	<xsd:complexType name="fileType">
+		<xsd:sequence>
+			<xsd:element name="customdata" type="ald:customDataType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+
+		<xsd:attribute name="path" use="required" type="xsd:string"/> <!-- the (internal) path to the file -->
+		<xsd:anyAttribute/>
+	</xsd:complexType>
+
+	<!-- defines a tag for the package -->
+	<xsd:complexType name="tagType">
+		<xsd:sequence>
+			<xsd:element name="customdata" type="ald:customDataType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+
+		<xsd:attribute name="name" use="required" type="ald:word-string"/> <!-- the name of the tag -->
+		<xsd:anyAttribute/>
+	</xsd:complexType>
+
+	<!-- defines a link related to the package -->
+	<xsd:complexType name="linkType">
+		<xsd:sequence>
+			<xsd:element name="customdata" type="ald:customDataType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+
+		<xsd:attribute use="required" type="xsd:string" name="name"/> <!-- a short name for what the link points to -->
+		<xsd:attribute use="required" type="xsd:string" name="description"/> <!-- a description of what the link points to -->
+		<xsd:attribute use="required" type="ald:internetURL" name="href"/> <!-- the URL the link points to -->
+		<xsd:anyAttribute/>
+	</xsd:complexType>
+
+	<!-- allows users to include custom data in the package which can be read by ALD clients -->
+	<xsd:complexType name="customDataType" mixed="true">
+		<xsd:sequence>
+			<xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+		</xsd:sequence>
+
+		<xsd:attribute use="required" type="xsd:string" name="namespace"/> <!-- a string identifying the client using this or the usage for the included data -->
+		<xsd:attribute use="optional" type="ald:schemaURL" name="schema"/> <!-- an optional schema URL which can be used for checking the content -->
+		<xsd:anyAttribute/>
+	</xsd:complexType>
+
+	<xsd:complexType name="file-list-type">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:choice>
+				<xsd:element name="file" type="ald:fileType"/>
+				<xsd:element name="file-set" type="ald:fileSetType"/>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="repositoryType">
+		<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+			<xsd:element name="url">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:anyURI">
+							<xsd:attribute use="required" type="ald:access" name="access"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute use="required" type="xsd:string" name="type"/>
+		<xsd:attribute use="required" type="ald:internetURL" name="view-url"/>
+	</xsd:complexType>
+
+	<!-- root -->
+	<xsd:element name="package">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="description" minOccurs="1" maxOccurs="1" type="xsd:string"/>
+				<xsd:element name="authors" minOccurs="1" maxOccurs="1"> <!-- the list of authors being involved in this item -->
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="author" type="ald:authorType" minOccurs="1" maxOccurs="unbounded"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="dependencies" minOccurs="0" maxOccurs="1"> <!-- the list of dependencies this package has -->
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="dependency" type="ald:dependencyType" minOccurs="0" maxOccurs="unbounded"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="targets" minOccurs="1" maxOccurs="1">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="target" type="ald:targetType" minOccurs="0" maxOccurs="unbounded"/>
+						</xsd:sequence>
+					</xsd:complexType>
+
+					<xsd:unique name="targetID">
+						<xsd:selector xpath=".//ald:target"/>
+						<xsd:field xpath="@ald:id"/>
+					</xsd:unique>
+				</xsd:element>
+				<xsd:element name="files" minOccurs="1" maxOccurs="1"> <!-- holds the lists of files to include -->
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="doc" type="ald:file-list-type" minOccurs="1" maxOccurs="1"/> <!-- the list of documentation files -->
+							<xsd:element name="src" type="ald:file-list-type" minOccurs="1" maxOccurs="1"/> <!-- the list of source files -->
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="development" minOccurs="0" maxOccurs="1">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="repository" type="ald:repositoryType" minOccurs="1" maxOccurs="unbounded"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="tags" minOccurs="0" maxOccurs="1"> <!-- the list of tags for the package -->
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="tag" type="ald:tagType" minOccurs="1" maxOccurs="unbounded"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<!-- todo: triggers
+					Triggers can be run after installation, before and after update and before uninstall.
+					They consist of a command line to execute.
+				-->
+				<xsd:element name="links" minOccurs="1" maxOccurs="1"> <!-- the list of related links -->
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="link" type="ald:linkType" minOccurs="0" maxOccurs="unbounded"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:any minOccurs="0"/>
+			</xsd:sequence>
+
+			<xsd:attribute use="required" type="ald:guid-type"   name="id"/> <!-- the unique ID of the package -->
+			<xsd:attribute use="required" type="xsd:string"      name="type"/> <!-- the type of the package -->
+			<xsd:attribute use="required" type="xsd:string"      name="summary"/>
+			<xsd:attribute use="required" type="xsd:string"      name="name"/> <!-- the name of the package -->
+			<xsd:attribute use="required" type="ald:semverType"  name="version"/> <!-- the current version of the package -->
+			<xsd:attribute use="optional" type="xsd:string"      name="logo-image"/> <!-- the relative path to a logo image, if one is included -->
+			<xsd:attribute use="optional" type="ald:internetURL" name="homepage"/>
+			<xsd:anyAttribute/>
+		</xsd:complexType>
+
+		<xsd:keyref name="target-ref" refer="ald:targetID">
+			<xsd:selector xpath=".//ald:file-set/ald:target"/>
+			<xsd:field xpath="@ald:ref"/>
+		</xsd:keyref>
+	</xsd:element>
+</xsd:schema>
