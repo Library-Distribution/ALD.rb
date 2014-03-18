@@ -1,10 +1,18 @@
 require 'helper'
 require 'test/unit'
+require 'nokogiri'
 require 'ALD/definition'
 
 class DefinitionTest < Test::Unit::TestCase
   def setup
     @definition = ALD::Definition.new(File.read('test/data/archives/valid/definition.ald'))
+  end
+
+  def test_from_doc
+    doc = Nokogiri::XML(File.read('test/data/archives/valid/definition.ald'))
+    definition = ALD::Definition.new(doc)
+    assert_not_nil definition, "Failed to create definition from Nokogiri::XML::Document"
+    assert_equal '7fa97a01c5e94ab69be4e0fe6c93a39e', definition.id.downcase
   end
 
   def test_attributes
