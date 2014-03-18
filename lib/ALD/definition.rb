@@ -3,7 +3,6 @@ require 'ALD/exceptions'
 
 module ALD
   class Definition
-    attr_reader :document
 
     XML_NAMESPACE = 'ald://package/schema/2012'
 
@@ -17,7 +16,7 @@ module ALD
 
     TOPLEVEL_ATTRIBUTES.each do |attr|
       define_method attr.to_sym do
-        document.xpath("//@ald:#{attr}", 'ald' => XML_NAMESPACE)[0].value
+        @document.xpath("//@ald:#{attr}", 'ald' => XML_NAMESPACE)[0].value
       end
     end
 
@@ -32,11 +31,11 @@ module ALD
     end
 
     def description
-      document.xpath("//ald:description", 'ald' => XML_NAMESPACE)[0].text
+      @document.xpath("//ald:description", 'ald' => XML_NAMESPACE)[0].text
     end
 
     def tags
-      document.xpath("//ald:tags/ald:tag/@ald:name", 'ald' => XML_NAMESPACE).map { |tag| tag.value }
+      @document.xpath("//ald:tags/ald:tag/@ald:name", 'ald' => XML_NAMESPACE).map { |tag| tag.value }
     end
 
     def valid?
@@ -44,7 +43,7 @@ module ALD
     end
 
     def to_s
-      document.to_s
+      @document.to_s
     end
   end
 end
