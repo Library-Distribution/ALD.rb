@@ -29,4 +29,9 @@ class DefinitionTest < Test::Unit::TestCase
     expected_authors = [{'name' => 'Oscar'}, {'name' => 'Tom', 'homepage' => 'http://lmgtfy.com/?q=tom'}, {'name' => 'Bill', 'user-name' => 'bill'}]
     assert_equal expected_authors,                  @definition.authors,      "Failed to read authors from definition"
   end
+
+  def test_links
+    expected_links = [{'name' => 'issue tracker', 'description' => 'github issue tracker', 'href' => 'https://github.com/octocat/Spoon-Knife/issues'}]
+    assert_equal expected_links,                    @definition.links,        "Failed to read links from definition"
+  end
 end

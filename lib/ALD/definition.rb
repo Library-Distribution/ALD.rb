@@ -44,14 +44,11 @@ module ALD
     end
 
     def authors
-      @document.xpath('//ald:authors/ald:author', 'ald' => XML_NAMESPACE).map do |e|
-        author = { 'name' => e.attribute_with_ns('name', XML_NAMESPACE).value }
-        %w[user-name homepage email].each do |key|
-          attr = e.attribute_with_ns(key, XML_NAMESPACE)
-          author[key] = attr.value unless attr.nil?
-        end
-        author
-      end
+      attribute_hash '//ald:authors/ald:author', %w[name user-name homepage email]
+    end
+
+    def links
+     attribute_hash '//ald:links/ald:link', %w[name description href]
     end
 
     def valid?
@@ -60,6 +57,14 @@ module ALD
 
     def to_s
       @document.to_s
+    end
+
+    private
+
+    def attribute_hash(xpath, keys)
+      @document.xpath(xpath, 'ald' => XML_NAMESPACE).map do |e|
+        Hash[keys.map { |k| e.attribute_with_ns(k, XML_NAMESPACE) }.reject(&:nil?).map { |a| [a.node_name, a.value] }]
+      end
     end
   end
 end

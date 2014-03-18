@@ -13,5 +13,7 @@
 	<ald:tags>
 		<ald:tag ald:name="my_tag"/>
 	</ald:tags>
-	<ald:links />
+	<ald:links>
+		<ald:link ald:name="issue tracker" ald:description="github issue tracker" ald:href="https://github.com/octocat/Spoon-Knife/issues"/>
+	</ald:links>
 </ald:package>
