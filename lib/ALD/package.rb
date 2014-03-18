@@ -1,5 +1,5 @@
 require 'zip'
-require 'ALD/package_generator'
+require 'ALD/definition'
 require 'ALD/exceptions'
 
 module ALD
@@ -36,32 +36,6 @@ module ALD
     # Closes a no longer required package
     def close
       @archive.close
-    end
-
-    # Creates a new package file from the given data
-    #
-    # generator - an ALD::Package::Generator instance to create the package from
-    # path - the path where to create the package. This file must not yet exist.
-    #
-    # Returns a new ALD::Package instance representing the newly created file
-    def self.create(generator, path)
-      if File.exists? path
-        raise IOError, "Destination '#{path}' already exists!"
-      end
-
-      raise InvalidPackageError unless generator.valid?
-
-      archive = Zip::File.open(path, Zip::File::CREATE)
-
-      archive.get_output_stream('definition.ald') do |s|
-        generator.definition.document.write(s)
-      end
-
-      generator.files.each do |file|
-        archive.add(file.path, file.src)
-      end
-
-      new(file)
     end
 
     # Alias for new

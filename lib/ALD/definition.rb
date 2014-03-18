@@ -39,9 +39,6 @@ module ALD
       REXML::XPath.match(document.root, "//ald:tags/ald:tag/@ald:name", 'ald' => XML_NAMESPACE).map { |tag| tag.value }
     end
 
-    def self.create!(generator)
-    end
-
     def valid?
       true
     end
