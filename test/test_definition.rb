@@ -24,4 +24,9 @@ class DefinitionTest < Test::Unit::TestCase
   def test_tags
     assert_equal ['my_tag'],                        @definition.tags,         "Failed to read tags from definition"
   end
+
+  def test_authors
+    expected_authors = [{'name' => 'Oscar'}, {'name' => 'Tom', 'homepage' => 'http://lmgtfy.com/?q=tom'}, {'name' => 'Bill', 'user-name' => 'bill'}]
+    assert_equal expected_authors,                  @definition.authors,      "Failed to read authors from definition"
+  end
 end

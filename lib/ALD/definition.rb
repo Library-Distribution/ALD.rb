@@ -43,6 +43,17 @@ module ALD
       @document.xpath("//ald:tags/ald:tag/@ald:name", 'ald' => XML_NAMESPACE).map { |tag| tag.value }
     end
 
+    def authors
+      @document.xpath('//ald:authors/ald:author', 'ald' => XML_NAMESPACE).map do |e|
+        author = { 'name' => e.attribute_with_ns('name', XML_NAMESPACE).value }
+        %w[user-name homepage email].each do |key|
+          attr = e.attribute_with_ns(key, XML_NAMESPACE)
+          author[key] = attr.value unless attr.nil?
+        end
+        author
+      end
+    end
+
     def valid?
       Definition.schema.valid?(@document)
     end

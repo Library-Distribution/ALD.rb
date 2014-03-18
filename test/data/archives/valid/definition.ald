@@ -2,6 +2,8 @@
 	<ald:description>Some ALD item for testing &gt;&gt;&gt;</ald:description>
 	<ald:authors>
 		<ald:author ald:name="Oscar"/>
+		<ald:author ald:name="Tom" ald:homepage="http://lmgtfy.com/?q=tom"/>
+		<ald:author ald:user-name="bill" ald:name="Bill"/>
 	</ald:authors>
 	<ald:targets/>
 	<ald:files>
