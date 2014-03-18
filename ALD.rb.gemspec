@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'ALD'
-  s.version = '0.0.0'
+  s.version = '0.0.1'
   s.date = '2014-03-17'
   s.summary = 'Utility gem for the ALD protocol'
   s.description = 'A gem containing helpers for the ALD API, the ALD package format and ALD package definitions.'
