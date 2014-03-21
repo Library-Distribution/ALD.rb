@@ -5,10 +5,11 @@ module ALD
     # consumers.
     #
     # Child classes inheriting from this class must support:
-    #   * @data        - a Hash containing the entry's data
-    #   * @initialized - a Boolean indicating whether @data is yet complete or
-    #                    not
-    #   * #request     - load missing information into @data
+    #
+    #   @data        - a Hash containing the entry's data
+    #   @initialized - a Boolean indicating whether @data is yet complete or
+    #                  not
+    #   #request     - load missing information into @data
     class CollectionEntry
       # Internal: Create a new entry with the given data
       #

@@ -4,11 +4,13 @@ module ALD
     # the ALD API.
     #
     # Child classes inheriting from this class must support:
-    #   * @data        - Array of Hashes necessary to create a new entry of
-    #                    this collection, initially nil
-    #   * #entry(hash) - create a new entry from the given Hash
-    #   * #request     - load the @data Array
+    #
+    #   @data        - Array of Hashes necessary to create a new entry of this
+    #                  collection, initially nil
+    #   #entry(hash) - create a new entry from the given Hash
+    #   #request     - load the @data Array
     class Collection
+
       # This class includes the Enumerable module.
       include Enumerable
 
@@ -34,7 +36,7 @@ module ALD
       #
       # index - the 0-based integer index of the item in the collection
       #
-      # Returns the (index+1)th entry in the collectión, as returned by #entry
+      # Returns the (index+1)th entry in the collection, as returned by #entry
       def [](index)
         request unless initialized?
         entry(@data[index])

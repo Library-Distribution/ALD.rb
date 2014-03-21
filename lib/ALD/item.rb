@@ -5,24 +5,6 @@ module ALD
     # Public: An item (e.g. a library or app) uploaded to an ALD server.
     class Item < CollectionEntry
 
-      # Internal: Create a new instance for given data. This method should not
-      # called by library consumers. Instead access entries via API#item or
-      # ItemCollection#[].
-      #
-      # api         - the ALD::API instance this item belongs to
-      # data        - a Hash containing data concerning the item:
-      #               id      - the GUID of the item
-      #               name    - the name of the item
-      #               version - the semver version of the item
-      #               The above fields are mandatory. However, the hash may
-      #               contain a lot more data about the item.
-      # initialized - a Boolean indicating if data only contains the mandatory
-      #               fields or *all* data on the item.
-      def initialize(api, data, initialized = false)
-        raise ArgumentError unless Item.valid_data?(data)
-        super(api, data, initialized)
-      end
-
       # Public: Get the ID of the item.
       #
       # Examples
@@ -59,6 +41,24 @@ module ALD
       #
       #   version()
 
+      # Internal: Create a new instance for given data. This method should not
+      # called by library consumers. Instead access entries via API#item or
+      # ItemCollection#[].
+      #
+      # api         - the ALD::API instance this item belongs to
+      # data        - a Hash containing data concerning the item:
+      #               id      - the GUID of the item
+      #               name    - the name of the item
+      #               version - the semver version of the item
+      #               The above fields are mandatory. However, the hash may
+      #               contain a lot more data about the item.
+      # initialized - a Boolean indicating if data only contains the mandatory
+      #               fields or *all* data on the item.
+      def initialize(api, data, initialized = false)
+        raise ArgumentError unless Item.valid_data?(data)
+        super(api, data, initialized)
+      end
+
       private
 
       # Internal: If the item was initialized with only mandatory data, use the
@@ -74,7 +74,7 @@ module ALD
       #
       # data - the Hash to check for mandatory fields
       #
-      # Returns true if the Hahs is valid, false otherwise.
+      # Returns true if the Hash is valid, false otherwise.
       def self.valid_data?(data)
         data.is_a?(Hash) && initialized_attributes.all? { |k| data.key?(k) }
       end
