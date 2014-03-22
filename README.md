@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.org/Library-Distribution/ALD.rb.svg?branch=master)](https://travis-ci.org/Library-Distribution/ALD.rb)
 [![Code Climate](https://codeclimate.com/github/Library-Distribution/ALD.rb.png)](https://codeclimate.com/github/Library-Distribution/ALD.rb)
 [![Gemnasium](https://gemnasium.com/Library-Distribution/ALD.rb.png)](https://gemnasium.com/Library-Distribution/ALD.rb)
+[![Gem Version](http://img.shields.io/gem/v/ALD.svg)](http://rubygems.org/gems/ALD)
 
 ## About
 This is an in-progress attempt at a Ruby library for the ALD protocol, for both client-side and server-side use.
