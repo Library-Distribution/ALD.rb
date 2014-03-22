@@ -85,10 +85,10 @@ module ALD
       #                           order of precedence; or a hash where the keys
       #                           are the sorting criteria, and the values (:asc,
       #                           :desc) indicate sorting order.
-      #              :range     - A Range of items to return. This makes most
-      #                           sense in combination with sorting. Note that
-      #                           the range is relative to the collection the
-      #                           operation is performed upon.
+      #              :range     - A zero-based Range of items to return. This
+      #                           makes most sense in combination with sorting.
+      #                           Note that the range is relative to the
+      #                           collection the operation is performed upon.
       #
       # Returns a new ItemCollection instance (or self, if conditions is nil)
       #
@@ -156,7 +156,7 @@ module ALD
         data['tags'] = @conditions['tags'].join(',') if @conditions.key?(:tags)
         data['sort'] = @conditions[:sort].map { |k, dir| "#{dir == :desc ? '-' : ''}#{k}" }.join(',') if @conditions.key(:sort)
 
-        if @conditions.key(:range)
+        if @conditions.key?(:range)
           data['start'] = @conditions[:range].min
           data['count'] = @conditions[:range].max - @conditions[:range].min + 1
         end
