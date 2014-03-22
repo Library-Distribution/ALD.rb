@@ -3,20 +3,27 @@ require 'ALD/definition'
 require 'ALD/exceptions'
 
 module ALD
-  # Represents an ALD package file containing an app or library and its definition
+  # Public: Represents an ALD package file containing an app or library and its
+  # definition.
   class Package
 
-    # The rubyzip Zip::File object containing the data
+    # Internal: The rubyzip Zip::File object containing the data.
     attr_reader :archive
 
-    # The ALD::Definition instance representing the definition contained in the package
+    # Public: The ALD::Definition instance representing the definition contained
+    # in the package. Use this to extract all the information on the package.
     attr_reader :definition
 
-    # Opens a new ALD package file
+    # Public: Opens a new ALD package file.
     #
-    # file - a Zip::File instance or the path to the file
+    # file - a String representing the path to the file or a Zip::File instance
     #
     # Returns a new ALD::Package instance representing the package file
+    #
+    # Raises ALD::NoDefinitionError if the package contains no definition file.
+    #
+    # Raises ALD::InvalidPackageError if the package is not valid according to
+    # its definition.
     def initialize(file)
       if file.is_a? Zip::File
         @archive = file
@@ -30,27 +37,35 @@ module ALD
       @definition = Definition.new(def_entry.get_input_stream)
       raise InvalidPackageError, 'The given ZIP file is not a valid ALD archive!' unless Package.valid?(@archive, @definition)
 
-      # file access
+      # todo: file access
     end
 
-    # Closes a no longer required package
+    # Public: Closes a no longer required package. While this method has little
+    # effect for now, calling it should be considered best practice and ensures
+    # forward-compatibility.
+    #
+    # Returns nothing.
     def close
       @archive.close
     end
 
-    # Alias for new
+    # Public: Alias for ::new
     def self.open(file)
       new(file)
     end
 
-    # Tests if a given archive is a valid ALD package
+    # Public: Tests if a given archive is a valid ALD package. Although part of
+    # the public API, most library consumers will not need to call it, as it is
+    # already called by ::new.
     #
-    # file - a Zip::File instance for the package
+    # Not yet implemented.
+    #
+    # file       - a Zip::File instance for the package
     # definition - an ALD::Definition instance the package must meet
     #
     # Returns true if it is valid, false otherwise
     def self.valid?(file, definition)
-      true
+      true # todo
     end
   end
 end
