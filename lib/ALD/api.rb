@@ -104,7 +104,7 @@ module ALD
         if args.first.is_a? String # GUID
           items[args.first]
         elsif args.first.is_a? Hash # used internally to avoid multiple Item instances
-          @item_store[args.first[:id]] ||= Item.new(self, args.first)
+          @item_store[args.first['id']] ||= Item.new(self, args.first)
         end
       elsif args.length == 2 # name and version
         items[*args]
