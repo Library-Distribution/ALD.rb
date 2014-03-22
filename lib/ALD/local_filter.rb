@@ -1,6 +1,6 @@
 module ALD
   class API
-    class ItemCollection
+    class ItemCollection < Collection
       # Internal: Used by ItemCollection#where to filter items locally if
       # possible. All methods are module methods.
       module LocalFilter

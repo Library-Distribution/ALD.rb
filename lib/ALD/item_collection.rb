@@ -1,4 +1,5 @@
 require_relative 'collection'
+require_relative 'local_filter'
 
 module ALD
   class API
