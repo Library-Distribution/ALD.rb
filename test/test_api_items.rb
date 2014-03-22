@@ -91,6 +91,7 @@ class TestApiItems < Test::Unit::TestCase
   end
 
   def test_get_item_by_name_version
+    assert_equal api.items[1], api.item('TestItem', '1.0.0'), "API#item(name, version) returned wrong item"
     assert_equal api.items[0], api.items['TestItem', '0.0.1'], "ItemCollection#[name, version] returned wrong item"
   end
 
