@@ -226,8 +226,8 @@ module ALD
           min, max = @conditions[:range].min, @conditions[:range].max
         end
 
-        new_min = min + conditions[:range].min
-        new_max = new_min + conditions[:range].size
+        new_min = min + new_range.min
+        new_max = new_min + new_range.size
         raise ArgumentError if new_min > max || new_max > max
 
         (new_min..new_max)
