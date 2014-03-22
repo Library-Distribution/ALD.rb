@@ -162,7 +162,10 @@ module ALD
           data['count'] = @conditions[:range].max - @conditions[:range].min + 1
         end
 
-        @data = @api.request("/items/?#{URI.encode_www_form(data)}")
+        @data = @api.request("/items/?#{URI.encode_www_form(data)}").map do |hash|
+          hash['id'] = @api.normalize_id(hash['id'])
+          hash
+        end
       end
 
       # Internal: Used by Collection#each and Collection#[] to create new items.
