@@ -47,11 +47,10 @@ module ALD
           raise ArgumentError
         end
 
-        if initialized?
-          item = @data.find { |hash| filter.keys.all? { |k| hash[k] == filter[k] } }
-        else
-          # todo: get full item description; pass :initialized = true to API#item and thus to Item::new
-        end
+        request unless initialized?
+        item = @data.find { |hash| filter.keys.all? { |k| hash[k.to_s] == filter[k] } }
+
+        # todo: if not initialized?, do not request; instead get full item description and pass it to API#item
         item.nil? ? nil : entry(item)
       end
 
