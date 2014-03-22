@@ -228,7 +228,7 @@ module ALD
         end
 
         new_min = min + new_range.min
-        new_max = new_min + new_range.size - 1
+        new_max = new_min + new_range.max - new_range.min # == new_min + new_range.size - 1
         raise ArgumentError if new_min > max || new_max > max
 
         (new_min..new_max)
