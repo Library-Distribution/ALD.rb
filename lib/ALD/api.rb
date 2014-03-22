@@ -150,9 +150,9 @@ module ALD
         url = @root_url + url
         request = case method
           when :get
-            Net::HTTP::Get.new url
+            Net::HTTP::Get.new url.request_uri
           when :post
-            Net::HTTP::Post.new url
+            Net::HTTP::Post.new url.request_uri
           else
             raise ArgumentError
         end
