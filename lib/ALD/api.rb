@@ -28,14 +28,14 @@ module ALD
 
     # Public: Set authentication information for future requests.
     #
-    # hash - a Hash containing the authentication information:
+    # auth - a Hash containing the authentication information:
     #        :name     - the user name to use
     #        :password - the plaintext password to use
     #
     # Returns the hash that was passed.
     #
     # Raises ArgumentError if the passed hash does not have the specified keys.
-    def auth=(hash)
+    def auth=(auth)
       raise ArgumentError unless valid_auth?(auth)
       @auth = auth
     end
