@@ -1,6 +1,6 @@
 require 'zip'
-require 'ALD/definition'
-require 'ALD/exceptions'
+require_relative 'definition'
+require_relative 'exceptions'
 
 module ALD
   # Public: Represents an ALD package file containing an app or library and its

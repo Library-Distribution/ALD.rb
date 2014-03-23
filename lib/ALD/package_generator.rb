@@ -1,7 +1,7 @@
-require 'ALD/definition'
-require 'ALD/definition_generator'
-require 'ALD/package'
-require 'ALD/exceptions'
+require_relative 'definition'
+require_relative 'definition_generator'
+require_relative 'package'
+require_relative 'exceptions'
 
 module ALD
   class Package

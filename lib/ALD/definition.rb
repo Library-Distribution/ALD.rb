@@ -1,5 +1,5 @@
 require 'nokogiri'
-require 'ALD/exceptions'
+require_relative 'exceptions'
 
 module ALD
   # Public: Access information in ALD package definition files.
