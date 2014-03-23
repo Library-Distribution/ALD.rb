@@ -21,7 +21,7 @@ class TestApiItems < Test::Unit::TestCase
   def setup
     @stub = stub_request(:get, API_URL + 'items/').with(query: hash_including({})).to_return do |request|
       item_data = self.item_data
-      query = request.uri.query_values
+      query = request.uri.query_values || {}
 
       # simulate server behaviour for 'start' and 'count' params
       item_data = item_data[query['start'].to_i, item_data.length] if query.key?('start')
