@@ -1,8 +1,10 @@
 require_relative 'item_collection'
 require_relative 'user_collection'
 require_relative 'item'
+require_relative 'exceptions'
 
 require 'net/http'
+require 'net/http/digest_auth'
 require 'json'
 
 module ALD
@@ -157,13 +159,28 @@ module ALD
             raise ArgumentError
         end
 
-        request.basic_auth(@auth[:name], @auth[:password]) if @auth
         headers = DEFAULT_HEADERS.merge(headers)
         headers.each do |k, v|
           request[k] = v
         end
 
         response = http.request(request)
+
+        if response.code.to_i == 401
+          raise NoAuthError if @auth.nil?
+          if auth_method(response) == :basic
+            request.basic_auth(@auth[:name], @auth[:password])
+          elsif auth_method(response) == :digest
+            url.user, url.password = @auth[:name], @auth[:password]
+            request.add_field 'Authorization', Net::HTTP::DigestAuth.new.auth_header(url, response['WWW-Authenticate'], method.to_s.upcase)
+          else
+            raise UnsupportedAuthMethodError
+          end
+
+          response = http.request(request)
+          raise InvalidAuthError if response.code.to_i == 401
+        end
+
         raise StandardError unless (200...300).include?(response.code.to_i)
         if response['Content-type'].include?('application/json')
           JSON.parse(response.body)
@@ -174,6 +191,15 @@ module ALD
     end
 
     private
+
+    # Internal: Get the authentication method used by a server
+    #
+    # response - the Net::HTTPResponse to examine
+    #
+    # Returns the used method as Symbol, e.g. :digest or :basic
+    def auth_method(response)
+      response['WWW-Authenticate'].strip.split(' ')[0].downcase.to_sym
+    end
 
     # Internal: Check if a Hash contains valid auth data
     #
