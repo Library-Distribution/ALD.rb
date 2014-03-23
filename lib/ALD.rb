@@ -3,7 +3,7 @@ require 'ALD/package_generator'
 require 'ALD/definition'
 require 'ALD/definition_generator.rb'
 require 'ALD/exceptions'
-require 'ALD/api'
+require_relative 'ALD/api'
 
 module ALD
 end
