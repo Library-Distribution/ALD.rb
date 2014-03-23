@@ -32,14 +32,26 @@ module ALD
         end
       end
 
-      # Public: Access an entry by index in the collection
+      # Internal: Access an entry in the collection.
       #
-      # index - the 0-based integer index of the item in the collection
+      # Actual arguments and behaviour depends on child classes.
       #
-      # Returns the (index+1)th entry in the collection, as returned by #entry
-      def [](index)
-        request unless initialized?
-        entry(@data[index])
+      # Returns an entry of the collection, or nil if none is found.
+      #
+      # Raises ArgumentError if the given arguments are invalid.
+      def [](*args)
+        if args.length == 1 && args.first.is_a?(Integer)
+          request unless initialized?
+          entry(@data[args.first])
+        else
+          filter = entry_filter(args)
+
+          # todo: if not initialized?, do not request; instead get full entry description (new method request_entry(filter)) and pass it to #entry with initialized = true
+          request unless initialized?
+          entry = @data.find { |hash| filter.keys.all? { |k| hash[k.to_s] == filter[k] } }
+
+          entry.nil? ? nil : entry(entry)
+        end
       end
 
       # Public: Indicate if all data in this collection is present. If false,
@@ -49,6 +61,24 @@ module ALD
       # Returns a Boolean; true if all data is present, false otherwise
       def initialized?
         !@data.nil?
+      end
+
+      private
+
+      # Internal: Get filter conditions for an entry. Used by #[] to get an
+      # entry based on the given arguments.
+      #
+      # This method is a mere placeholder. Child classes must override it to
+      # implement their access semantics for entries.
+      #
+      # args - an Array of arguments to convert into conditions
+      #
+      # Returns the Hash of conditions, where each key represents a property
+      # of the entry to be found that must equal the corresponding value.
+      #
+      # Raises ArgumentError if the arguments cannot be converted.
+      def entry_filter(args)
+        {}
       end
     end
   end

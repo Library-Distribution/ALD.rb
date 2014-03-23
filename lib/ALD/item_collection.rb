@@ -31,29 +31,18 @@ module ALD
       #            # This makes most sense in an explicitly ordered collection
       #
       # Returns the corresponding ALD::API::Item instance, or nil if not found
-      def [](*args)
-        filter = {}
-
-        if args.length == 1
-          if args.first.is_a? Integer # index
-            return super(args.first)
-          elsif args.first.is_a? String # GUID
-            filter = { id: @api.normalize_id(args.first) }
-          else
-            raise ArgumentError
-          end
-        elsif args.length == 2 # name and version
-          filter = { name: args.first, version: args.last }
-        else
-          raise ArgumentError
-        end
-
-        request unless initialized?
-        item = @data.find { |hash| filter.keys.all? { |k| hash[k.to_s] == filter[k] } }
-
-        # todo: if not initialized?, do not request; instead get full item description and pass it to API#item
-        item.nil? ? nil : entry(item)
-      end
+      #
+      # Signature
+      #
+      #   [](id)
+      #   [](name, version)
+      #   [](index)
+      #
+      # id      - a GUID String uniquely identifying the item
+      # name    - a String containing the item's name
+      # version - a String containing the item's semver version
+      # index   - an Integer with the item's zero-based index within the
+      #           collection.
 
       # Internal: filter conditions that allow specifying a range, like
       # 'version-min=0.2.1&version-max=3.4.5'
@@ -174,6 +163,21 @@ module ALD
       # hash - a Hash describing the item, with the keys 'id', 'name' and 'version'.
       def entry(hash) # used by the Collection class
         @api.item(hash)
+      end
+
+      # Internal: Implements item access for #[]. See Collection#entry_filter
+      # for more information.
+      #
+      # ItemCollection allows access by ID (String) or name and version
+      # (both String).
+      def entry_filter(args)
+        if args.length == 1 && args.first.is_a?(String)
+          { id: @api.normalize_id(args.first) }
+        elsif args.length == 2
+          { name: args.first, version: args.last }
+        else
+          raise ArgumentError
+        end
       end
 
       # Internal: A regex to determine if a range condition is specifying a range.
