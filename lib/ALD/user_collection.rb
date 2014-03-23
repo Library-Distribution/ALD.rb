@@ -4,7 +4,7 @@ module ALD
   class API
     class UserCollection < Collection
       def initialize(api, conditions = {}, data = nil)
-        super(api, data)
+        super(api, conditions, data)
       end
 
       def where(conditions)

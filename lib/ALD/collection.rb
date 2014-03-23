@@ -16,10 +16,11 @@ module ALD
 
       # Internal: Create a new Collection
       #
-      # api  - the ALD::API instance trhis collection belongs to
-      # data - an Array of Hashes for @data. May be nil.
-      def initialize(api, data)
-        @api, @data = api, data
+      # api        - the ALD::API instance this collection belongs to
+      # conditions - a Hash of conditions entries in this collection must meet
+      # data       - an Array of Hashes for @data. May be nil.
+      def initialize(api, conditions = {}, data = nil)
+        @api, @conditions, @data = api, conditions, data
       end
 
       # Public: Iterate over the entries in this collection

@@ -16,8 +16,7 @@ module ALD
       #              name    - the item's name
       #              version - the item's semver version
       def initialize(api, conditions = {}, data = nil)
-        @conditions = conditions
-        super(api, data)
+        super(api, conditions, data)
       end
 
       # Public: Access an individual item by ID, name and version or index in
