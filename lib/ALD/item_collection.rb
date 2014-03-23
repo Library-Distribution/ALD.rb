@@ -162,7 +162,8 @@ module ALD
           data['count'] = @conditions[:range].max - @conditions[:range].min + 1
         end
 
-        @data = @api.request("/items/?#{URI.encode_www_form(data)}").map do |hash|
+        url = "/items/#{data.empty? ? '' : '?'}#{URI.encode_www_form(data)}"
+        @data = @api.request(url).map do |hash|
           hash['id'] = @api.normalize_id(hash['id'])
           hash
         end
