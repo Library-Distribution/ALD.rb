@@ -142,7 +142,7 @@ module ALD
           end
         end
 
-        data['tags'] = @conditions['tags'].join(',') if @conditions.key?(:tags)
+        data['tags'] = @conditions[:tags].join(',') if @conditions.key?(:tags)
         data['sort'] = @conditions[:sort].map { |k, dir| "#{dir == :desc ? '-' : ''}#{k}" }.join(',') if @conditions.key(:sort)
 
         if @conditions.key?(:range)
