@@ -20,8 +20,6 @@ module ALD
     #   api = ALD::API.new('http://api.my_ald_server.com/v1/')
     def initialize(root_url)
       @root_url = URI(root_url)
-      @all_items = ItemCollection.new(self)
-      @all_users = UserCollection.new(self)
       @item_store = {}
     end
 
@@ -58,6 +56,7 @@ module ALD
     #
     # Raises ArgumentError if the specified conditions are invalid.
     def items(conditions = nil)
+      @all_items ||= ItemCollection.new(self)
       @all_items.where(conditions)
     end
 
@@ -70,6 +69,7 @@ module ALD
     #
     # Returns an ALD::API::UserCollection containing the users.
     def users(conditions = nil)
+      @all_users ||= UserCollection.new(self)
       @all_users.where(conditions)
     end
 
