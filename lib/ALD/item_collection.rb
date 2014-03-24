@@ -91,6 +91,8 @@ module ALD
             merge_ranges(@conditions, conditions, key) # handle merging for cases like 'downloads >= 5' and 'downloads <= 9' etc.
           elsif key == :range # not a "range condition" in the sense used above
             range_offset(conditions[:range])
+          elsif key == :tags
+            @conditions[:tags] << conditions[:tags]
           elsif key == :sort
             conditions[key] # enable re-sorting
           else
