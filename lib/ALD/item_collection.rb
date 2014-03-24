@@ -74,7 +74,7 @@ module ALD
       #                           as reviewed by the server.
       #              :tags      - A tag or an array of tags to filter for.
       #              :sort      - an Array of sorting criteria, in descending
-      #                           order of precedence; or a hash where the keys
+      #                           order of precedence; or a Hash where the keys
       #                           are the sorting criteria, and the values (:asc,
       #                           :desc) indicate sorting order.
       #              :range     - A zero-based Range of items to return. This
