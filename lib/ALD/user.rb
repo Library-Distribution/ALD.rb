@@ -1,4 +1,5 @@
 require_relative 'collection_entry'
+require 'date'
 
 module ALD
   class API
