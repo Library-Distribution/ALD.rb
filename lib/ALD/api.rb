@@ -21,7 +21,7 @@ module ALD
     #   api = ALD::API.new('http://api.my_ald_server.com/v1/')
     def initialize(root_url)
       @root_url = URI(root_url)
-      @item_store = {}
+      @item_store, @user_store = {}, {}
     end
 
     # Public: Get current authentication information Hash (see #auth=)
@@ -121,6 +121,43 @@ module ALD
         end
       elsif args.length == 2 # name and version
         items[*args]
+      else
+        raise ArgumentError
+      end
+    end
+
+    # Public: Get an individual user. This method is roughly equivalent to calling
+    # UserCollection#[] on API#users. Calling this method might trigger a HTTP
+    # request.
+    #
+    # Examples
+    #
+    #   api.user('6a309ac8a4304f5cb1e6a2982f680ca5')
+    #   api.user('Bob')
+    #
+    #   # As #item, this method also supports being passed a Hash, which should
+    #   # only be used internally.
+    #
+    # Returns the ALD::API::User instance representing the user, or nil if not
+    # found.
+    #
+    # Raises ArgumentError if the arguments are not of one of the supported forms.
+    #
+    # Signature
+    #
+    #   user(id)
+    #   user(name)
+    #
+    # id   - a 32-character GUID string containing the user's ID
+    # name - a String containing the user's name
+    def user(*args)
+      if args.length == 1
+        if args.first.is_a? String
+          users[args.first]
+        elsif args.first.is_a? Hash
+          args.first['id'] = normalize_id(args.first['id'])
+          @user_store[args.first['id']] ||= User.new(self, args.first)
+        end
       else
         raise ArgumentError
       end
