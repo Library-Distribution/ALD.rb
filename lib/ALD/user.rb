@@ -69,7 +69,7 @@ module ALD
       # Returns nothing.
       def request
         @data = @api.request("/users/#{id}")
-        @data['privileges'].map! { |priv| priv.to_sym }
+        @data['privileges'].map!(&:to_sym)
         @data['joined'] = DateTime.parse(@data['joined'])
       end
 
