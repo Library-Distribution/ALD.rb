@@ -1,6 +1,7 @@
 require_relative 'item_collection'
 require_relative 'user_collection'
 require_relative 'item'
+require_relative 'user'
 require_relative 'exceptions'
 
 require 'net/http'
