@@ -20,6 +20,25 @@ module ALD
       #
       #   name()
 
+      # Public: Get the user's registration date. This method might trigger a
+      # HTTP request.
+      #
+      # Returns a DateTime containing the date and time of the user's
+      # registration on the ALD server.
+      #
+      # Signature
+      #
+      #   joined()
+
+      # Public: Get the user's privileges on the ALD server. This method might
+      # trigger a HTTP request.
+      #
+      # Returns an Array of Symbols representing privileges the user has.
+      #
+      # Signature
+      #
+      #   privileges()
+
       # Internal: Create a new instance. This method is called by API#user and
       # should not be called by library consumers.
       #
@@ -31,6 +50,17 @@ module ALD
         super(api, data, initialized)
       end
 
+      # todo: mail
+
+      # Public: Get the MD5 hash of the user's mail adress. This method might
+      # trigger a HTTP request.
+      #
+      # Returns a String with the hashed mail adress.
+      def mailMD5
+        request unless initialized?
+        @data['mail-md5']
+      end
+
       private
 
       # Internal: If the data given to the constructor was not complete, use
@@ -38,7 +68,9 @@ module ALD
       #
       # Returns nothing.
       def request
-        # todo
+        @data = @api.request("/users/#{id}")
+        @data['privileges'].map! { |priv| priv.to_sym }
+        @data['joined'] = DateTime.parse(@data['joined'])
       end
 
       # Internal: Override of CollectionEntry#initialized_attributes to enable
@@ -47,6 +79,14 @@ module ALD
       # Returns an Array of attribute names (String)
       def self.initialized_attributes
         %w[id name]
+      end
+
+      # Internal: Override of CollectionEntry#requested_attributes to enable
+      # automatic method definition, in this case #joined and #privileges.
+      #
+      # Returns an Array of attribute names (String)
+      def self.requested_attributes
+        %w[joined privileges]
       end
     end
   end
