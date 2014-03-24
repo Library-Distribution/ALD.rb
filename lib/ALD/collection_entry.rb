@@ -19,19 +19,7 @@ module ALD
       #               not
       def initialize(api, data, initialized = false)
         @api, @data, @initialized = api, data, initialized
-
-        self.class.initialized_attributes.each do |attr|
-          self.class.send(:define_method, attr.to_sym) do
-            @data[attr]
-          end
-        end
-
-        self.class.requested_attributes.each do |attr|
-          self.class.send(:define_method, attr.to_sym) do
-            request unless initialized?
-            @data[attr]
-          end
-        end
+        self.class.define_attributes!
       end
 
       # Public: Indicate whether all data concerning this entry is available
@@ -59,6 +47,30 @@ module ALD
       # Returns an Array of attribute names (String)
       def self.requested_attributes
         []
+      end
+
+      # Internal: Dynamically define attributes determined by child classes.
+      # This is called by ::new to define the attributes child classes define
+      # in ::initialized_attributes and ::requested_attributes.
+      #
+      # Returns nothing.
+      def self.define_attributes!
+        return if @attributes_defined
+
+        initialized_attributes.each do |attr|
+          self.send(:define_method, attr.to_sym) do
+            @data[attr]
+          end
+        end
+
+        requested_attributes.each do |attr|
+          self.send(:define_method, attr.to_sym) do
+            request unless initialized?
+            @data[attr]
+          end
+        end
+
+        @attributes_defined = true
       end
     end
   end
