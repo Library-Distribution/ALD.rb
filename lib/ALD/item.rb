@@ -1,4 +1,5 @@
 require_relative 'collection_entry'
+require 'date'
 
 module ALD
   class API
@@ -41,6 +42,89 @@ module ALD
       #
       #   version()
 
+      # Public: Get the item's summary text. This method might trigger a HTTP
+      # request.
+      #
+      # Returns a String summarizing the item's purpose and contents.
+      #
+      # Signature
+      #
+      #   summary()
+
+      # Public: Get the item's description text. This method might trigger a
+      # HTTP request.
+      #
+      # Returns a String with the item's description.
+      #
+      # Signature
+      #
+      #   description()
+
+      # Public: Get the time the item was uploaded. This method might trigger a
+      # HTTP request.
+      #
+      # Returns a DateTime describing the time the item was first uploaded to
+      # the ALD server.
+      #
+      # Signature
+      #
+      #   uploaded()
+
+      # Public: Get if the item has been marked as reviewed by the ALD server.
+      # This method might trigger a HTTP request.
+      #
+      # Returns a Boolean indicating if the item was revieed or not.
+      #
+      # Signature
+      #
+      #   reviewed()
+
+      # Public: Get the number of downloads for the item. This method might
+      # trigger a HTTP request.
+      #
+      # Returns an Integer indicating how often the item was downloaded.
+      #
+      # Signature
+      #
+      #  downloads()
+
+      # Public: Get the tags the item was tagged with. This method might
+      # trigger a HTTP request.
+      #
+      # Returns an Array of Symbols representing the tags.
+      #
+      # Signature
+      #
+      #   tags()
+
+      # Public: get author information from the item. This method might trigger
+      # a HTTP request.
+      #
+      # Returns an Array of Hashes describing the authors.
+      #
+      # Signature
+      #
+      #   authors()
+
+      # Public: Get the user who owns the item. This method might trigger a
+      # HTTP request.
+      #
+      # Returns the ALD::API::User who owns the item.
+      #
+      # Signature
+      #
+      #   user()
+
+      # Public: Get the ratings the item was given. This method might trigger a
+      # HTTP request.
+      #
+      # Returns an Array of Integers representing the ratings given to the item
+      # by users.
+      #
+      # Signature
+      #
+      #   ratings()
+
       # Internal: Create a new instance for given data. This method should not
       # called by library consumers. Instead access entries via API#item or
       # ItemCollection#[].
@@ -66,7 +150,10 @@ module ALD
       #
       # Returns nothing.
       def request
-        # todo
+        @data = @api.request("/items/#{id}")
+        @data['uploaded'] = DateTime.parse(@data['uploaded'])
+        @data['tags'].map!(&:to_sym)
+        @data['user'] = @api.user(@data['user'])
       end
 
       # Internal: Ensure a Hash contains all information necessary to be passed
@@ -85,6 +172,14 @@ module ALD
       # Returns an Array of attribute names (String)
       def self.initialized_attributes
         %w[id name version]
+      end
+
+      # Internal: Override of CollectionEntry#requested_attributes to enable
+      # automatic method definition.
+      #
+      # Returns an Array of attribute names (String)
+      def self.requested_attributes
+        %w[summary description uploaded reviewed downloads tags authors user ratings]
       end
     end
   end
