@@ -101,6 +101,15 @@ module ALD
     # found.
     #
     # Raises ArgumentError if the arguments are not of one of the supported forms.
+    #
+    # Signature
+    #
+    #   item(id)
+    #   item(name, version)
+    #
+    # id      - the GUID String of the item to return
+    # name    - a String containing the item's name
+    # version - a String containing the item's semver version
     def item(*args)
       if args.length == 1
         if args.first.is_a? String # GUID
