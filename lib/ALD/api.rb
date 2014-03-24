@@ -215,13 +215,14 @@ module ALD
 
         if response.code.to_i == 401
           raise NoAuthError if @auth.nil?
-          if auth_method(response) == :basic
-            request.basic_auth(@auth[:name], @auth[:password])
-          elsif auth_method(response) == :digest
-            url.user, url.password = @auth[:name], @auth[:password]
-            request.add_field 'Authorization', Net::HTTP::DigestAuth.new.auth_header(url, response['WWW-Authenticate'], method.to_s.upcase)
-          else
-            raise UnsupportedAuthMethodError
+          case auth_method(response)
+            when :basic
+              request.basic_auth(@auth[:name], @auth[:password])
+            when :digest
+              url.user, url.password = @auth[:name], @auth[:password]
+              request.add_field 'Authorization', Net::HTTP::DigestAuth.new.auth_header(url, response['WWW-Authenticate'], method.to_s.upcase)
+            else
+              raise UnsupportedAuthMethodError
           end
 
           response = http.request(request)
