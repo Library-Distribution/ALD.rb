@@ -94,11 +94,31 @@ module ALD
         end
       end
 
+      # Internal: Make a HTTP request to the ALD server to get a single user.
+      # Used by Collection#[].
+      #
+      # filter - a filter Hash as returned by #entry_filter
+      #
+      # Returns a Hash with all information about the user.
+      #
+      # Raises ArgumentError if the filters cannot be handled.
+      def request_entry(filter)
+        url = if %w[id name].any? { |k| filter.key?(k.to_sym) }
+          "/users/#{filter[:id] || filter[:name]}"
+        else
+          raise ArgumentError
+        end
+
+        @api.request(url)
+      end
+
       # Internal: Used by Collection#each and Collection#[] to create new users.
       #
-      # hash - a Hash describing the item, with the keys 'id' and 'name'.
-      def entry(hash)
-        @api.user(hash)
+      # hash        - a Hash describing the item, with the keys 'id' and 'name'
+      # initialized - a Boolean indicating if the given Hash already contains
+      #               all information about the user or only name and id.
+      def entry(hash, initialized = false)
+        @api.user(hash, initialized)
       end
 
       # Internal: Implements user access for #[]. See Collection#entry_filter

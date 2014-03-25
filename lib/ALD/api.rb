@@ -91,7 +91,7 @@ module ALD
     #   api.item('185d265f24654545aad3f88e8a383339')
     #   api.item('MyApp', '0.9.5')
     #
-    #   # unlike ItemCollection#[], this also supports passing a hash:
+    #   # unlike ItemCollection#[], this also supports passing a Hash (and a Boolean):
     #   api.item({'id' => '185d265f24654545aad3f88e8a383339',
     #            'name' => 'MyApp',
     #            'version' => '4.5.6'})
@@ -112,13 +112,11 @@ module ALD
     # name    - a String containing the item's name
     # version - a String containing the item's semver version
     def item(*args)
-      if args.length == 1
-        if args.first.is_a? String # GUID
-          @item_store[normalize_id(args.first)] || items[args.first]
-        elsif args.first.is_a? Hash # used internally to avoid multiple Item instances
-          args.first['id'] = normalize_id(args.first['id'])
-          @item_store[args.first['id']] ||= Item.new(self, args.first)
-        end
+      if args.first.is_a? Hash # used internally to avoid multiple Item instances
+        args.first['id'] = normalize_id(args.first['id'])
+        @item_store[args.first['id']] ||= Item.new(self, *args)
+      elsif args.length == 1 && args.first.is_a?(String) # GUID
+        @item_store[normalize_id(args.first)] || items[args.first]
       elsif args.length == 2 # name and version
         items[*args]
       else
@@ -135,8 +133,8 @@ module ALD
     #   api.user('6a309ac8a4304f5cb1e6a2982f680ca5')
     #   api.user('Bob')
     #
-    #   # As #item, this method also supports being passed a Hash, which should
-    #   # only be used internally.
+    #   # As #item, this method also supports being passed a Hash (and a Boolean),
+    #   # which should only be used internally.
     #
     # Returns the ALD::API::User instance representing the user, or nil if not
     # found.
@@ -151,13 +149,11 @@ module ALD
     # id   - a 32-character GUID string containing the user's ID
     # name - a String containing the user's name
     def user(*args)
-      if args.length == 1
-        if args.first.is_a? String
-          @user_store[normalize_id(args.first)] || users[args.first]
-        elsif args.first.is_a? Hash
-          args.first['id'] = normalize_id(args.first['id'])
-          @user_store[args.first['id']] ||= User.new(self, args.first)
-        end
+      if args.first.is_a? Hash # used internally to avoid multiple User instances
+        args.first['id'] = normalize_id(args.first['id'])
+        @user_store[args.first['id']] ||= User.new(self, *args)
+      elsif args.length == 1 && args.first.is_a?(String)
+        @user_store[normalize_id(args.first)] || users[args.first]
       else
         raise ArgumentError
       end

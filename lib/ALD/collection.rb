@@ -5,10 +5,16 @@ module ALD
     #
     # Child classes inheriting from this class must support:
     #
-    #   @data        - Array of Hashes necessary to create a new entry of this
-    #                  collection, initially nil
-    #   #entry(hash) - create a new entry from the given Hash
-    #   #request     - load the @data Array
+    #   @data                  - Array of Hashes necessary to create a new
+    #                            entry of this collection, initially nil
+    #   #entry_filter          - From the given argument array, make a filter
+    #                            Hash that identifies the entry indicated by
+    #                            the arguments.
+    #   #entry(hash, complete) - create a new entry from the given Hash
+    #   #request               - load the @data Array
+    #   #request_entry(filter) - From the given filter Hash, load all
+    #                            information regarding the entry identified by
+    #                            it.
     class Collection
 
       # This class includes the Enumerable module.
@@ -47,11 +53,15 @@ module ALD
         else
           filter = entry_filter(args)
 
-          # todo: if not initialized?, do not request; instead get full entry description (new method request_entry(filter)) and pass it to #entry with initialized = true
-          request unless initialized?
-          entry = @data.find { |hash| filter.keys.all? { |k| hash[k.to_s] == filter[k] } }
+          if initialized?
+            entry = @data.find { |hash| filter.keys.all? { |k| hash[k.to_s] == filter[k] } }
+            full_entry = false
+          else
+            entry = request_entry(filter)
+            full_entry = true
+          end
 
-          entry.nil? ? nil : entry(entry)
+          entry.nil? ? nil : entry(entry, full_entry)
         end
       end
 

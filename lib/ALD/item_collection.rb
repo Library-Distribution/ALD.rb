@@ -129,11 +129,34 @@ module ALD
         end
       end
 
+      # Internal: Make a HTTP request to the ALD server to get a single item.
+      # Used by Collection#[].
+      #
+      # filter - a filter Hash as returned by #entry_filter
+      #
+      # Returns a Hash with all information about the item.
+      #
+      # Raises ArgumentError if the filters cannot be handled.
+      def request_entry(filter)
+        url = if filter.key?(:id)
+          "/items/#{filter[:id]}"
+        elsif %w[name version].all? { |k| filter.key?(k.to_sym) }
+          "/items/#{filter[:name]}/#{filter[:version]}"
+        else
+          raise ArgumentError
+        end
+
+        @api.request(url)
+      end
+
       # Internal: Used by Collection#each and Collection#[] to create new items.
       #
-      # hash - a Hash describing the item, with the keys 'id', 'name' and 'version'.
-      def entry(hash) # used by the Collection class
-        @api.item(hash)
+      # hash        - a Hash describing the item, with the keys 'id', 'name'
+      #               and 'version'.
+      # initialized - a Boolean indicating if the given Hash already contains
+      #               all information about the item or only name and id.
+      def entry(hash, initialized = false)
+        @api.item(hash, initialized)
       end
 
       # Internal: Implements item access for #[]. See Collection#entry_filter

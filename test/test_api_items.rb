@@ -36,6 +36,14 @@ class TestApiItems < Test::Unit::TestCase
         body: JSON.generate(item_data)
       }
     end
+    stub_request(:get, /^#{Regexp.escape(API_URL)}items\/([0-9a-fA-F]{32})\/?$/).to_return do |request|
+      /items\/([0-9a-fA-F]{32})\/?$/ =~ request.uri.to_s
+      { status: 200, headers: { 'Content-type' => 'application/json' }, body: JSON.generate(item_data.find { |item| item[:id] =~ /#{$~[1]}/i }) }
+    end
+    stub_request(:get, /^#{Regexp.escape(API_URL)}items\/([\w_]+)\/(.+)\/?$/).to_return do |request|
+      /items\/([\w_]+)\/(.+)\/?$/ =~ request.uri.to_s
+      { status: 200, headers: { 'Content-type' => 'application/json' }, body: JSON.generate(item_data.find { |item| item[:name] == $~[1] && item[:version] == $~[2] }) }
+    end
   end
 
   def test_empty_items
@@ -91,8 +99,8 @@ class TestApiItems < Test::Unit::TestCase
   end
 
   def test_get_item_by_name_version
-    assert_equal api.items[1], api.item('TestItem', '1.0.0'), "API#item(name, version) returned wrong item"
-    assert_equal api.items[0], api.items['TestItem', '0.0.1'], "ItemCollection#[name, version] returned wrong item"
+    assert_equal 'B86EE43BD2FB40C6958C031D2F3BAE6A', api.item('TestItem', '1.0.0').id, "API#item(name, version) returned wrong item"
+    assert_equal 'DE4E651033D64CA39FDB3761F34CECEA', api.items['TestItem', '0.0.1'].id, "ItemCollection#[name, version] returned wrong item"
   end
 
   def test_where_name
