@@ -79,7 +79,7 @@ module ALD
     #
     # Returns the semver version string of the API.
     def version
-      request('/version')['version']
+      @version ||= request('/version')['version']
     end
 
     # Public: Get an individual item. This method is roughly equivalent to calling
