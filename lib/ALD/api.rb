@@ -193,7 +193,7 @@ module ALD
     #
     # Raises ArgumentError is method is not supported.
     #
-    # Raises StandardError if the response code is not in (200...300).
+    # Raises API::RequestError if the response code is not in (200...300).
     def request(url, method = :get, headers = {}, body = nil)
       Net::HTTP.start(@root_url.host, @root_url.port) do |http|
         url = @root_url + url
@@ -206,7 +206,7 @@ module ALD
         response = http.request(request)
         response = request_with_auth(http, request, url, response) if response.code.to_i == 401
 
-        raise StandardError unless (200...300).include?(response.code.to_i)
+        raise RequestError unless (200...300).include?(response.code.to_i)
         if response['Content-type'].include?('application/json')
           JSON.parse(response.body)
         else
