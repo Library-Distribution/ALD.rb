@@ -197,37 +197,14 @@ module ALD
     def request(url, method = :get, headers = {}, body = nil)
       Net::HTTP.start(@root_url.host, @root_url.port) do |http|
         url = @root_url + url
-        request = case method
-          when :get
-            Net::HTTP::Get.new url.request_uri
-          when :post
-            Net::HTTP::Post.new url.request_uri
-          else
-            raise ArgumentError
-        end
 
-        headers = DEFAULT_HEADERS.merge(headers)
-        headers.each do |k, v|
+        request = create_request(method, url)
+        DEFAULT_HEADERS.merge(headers).each do |k, v|
           request[k] = v
         end
 
         response = http.request(request)
-
-        if response.code.to_i == 401
-          raise NoAuthError if @auth.nil?
-          case auth_method(response)
-            when :basic
-              request.basic_auth(@auth[:name], @auth[:password])
-            when :digest
-              url.user, url.password = @auth[:name], @auth[:password]
-              request.add_field 'Authorization', Net::HTTP::DigestAuth.new.auth_header(url, response['WWW-Authenticate'], method.to_s.upcase)
-            else
-              raise UnsupportedAuthMethodError
-          end
-
-          response = http.request(request)
-          raise InvalidAuthError if response.code.to_i == 401
-        end
+        response = request_with_auth(http, request, url, response) if response.code.to_i == 401
 
         raise StandardError unless (200...300).include?(response.code.to_i)
         if response['Content-type'].include?('application/json')
@@ -239,6 +216,57 @@ module ALD
     end
 
     private
+
+    # Internal: Create a new Net::HTTPRequest for the given method.
+    #
+    # method - a Symbol indicating the HTTP verb (lowercase
+    # url    - the URI to request
+    #
+    # Returns a Net::HTTPRequest for the given method.
+    #
+    # Raises ArgumentError if the verb is not supported.
+    def create_request(method, url)
+      case method
+        when :get
+          Net::HTTP::Get.new url.request_uri
+        when :post
+          Net::HTTP::Post.new url.request_uri
+        else
+          raise ArgumentError
+      end
+    end
+
+    # Internal: Retry a request with authentication
+    #
+    # http            - a Net::HTTP object to use for the request
+    # request         - the Net::HTTPRequest to use
+    # url             - the URI that is requested
+    # failed_response - the response that was given when requesting without auth
+    #
+    # Returns a successful Net::HTTPResponse for the request.
+    #
+    # Raises NoAuthError if @auth is not set.
+    #
+    # Raises UnsupportedAuthMethodError if the server uses a not supported auth
+    # method.
+    #
+    # Raises InvalidAuthError if the authenticated request yields a 401 response.
+    def request_with_auth(http, request, url, failed_response)
+      raise NoAuthError if @auth.nil?
+      case auth_method(failed_response)
+        when :basic
+          request.basic_auth(@auth[:name], @auth[:password])
+        when :digest
+          url.user, url.password = @auth[:name], @auth[:password]
+          request.add_field 'Authorization', Net::HTTP::DigestAuth.new.auth_header(url, failed_response['WWW-Authenticate'], request.method)
+        else
+          raise UnsupportedAuthMethodError
+      end
+
+      response = http.request(request)
+      raise InvalidAuthError if response.code.to_i == 401
+      response
+    end
 
     # Internal: Get the authentication method used by a server
     #
