@@ -63,7 +63,7 @@ module ALD
 
     def attribute_hash(xpath, keys)
       @document.xpath(xpath, 'ald' => XML_NAMESPACE).map do |e|
-        Hash[keys.map { |k| e.attribute_with_ns(k, XML_NAMESPACE) }.reject(&:nil?).map { |a| [a.node_name, a.value] }]
+        Hash[keys.map { |k| e.attribute_with_ns(k, XML_NAMESPACE) }.compact.map { |a| [a.node_name, a.value] }]
       end
     end
   end
