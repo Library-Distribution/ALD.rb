@@ -105,20 +105,42 @@ module ALD
         conds.select { |cond| @conditions.key?(cond.to_sym) }
       end
 
+      # Internal: Merge new conditions with the current ones.
+      #
+      # conditions - the new condition Hash to merge
+      #
+      # Returns the merged Hash
+      #
+      # Raises ArgumentError if the conditions are incompatible
+      def merge_conditions(conditions)
+        @conditions.merge(conditions) do |key, old_value, new_value|
+          if self.class::RANGE_CONDITIONS.include?(key.to_s)
+            merge_ranges(old_value, new_value) # handle merging for cases like 'downloads >= 5' and 'downloads <= 9' etc.
+          elsif self.class::ARRAY_CONDITIONS.include?(key.to_s)
+            old_value + new_value
+          elsif key == :range # not a "range condition" in the sense used above
+            range_offset(new_value)
+          elsif key == :sort
+            new_value # enable re-sorting
+          else
+            raise ArgumentError # for other overwrites fail!
+          end
+        end
+      end
+
       # Internal: A regex to determine if a range condition is specifying a range.
       RANGE_REGEX = /^\s*(<\=|>\=)\s*(.*)$/
 
       # Internal: Handle condition conflicts for range conditions. Used by #where.
       #
-      # old_conds - the old condition Hash
-      # new_conds - the new condition Hash to be applied on top of the old one
-      # key       - the conflicting key
+      # old - the old range condition value
+      # new - the new range condition value to be applied on top of the old one
       #
       # Returns the value that should be used in the merged conditions.
       #
       # Raises ArgumentError if the conflict cannot be resolved.
-      def merge_ranges(old_conds, new_conds, key)
-        constraints = [new_conds[key], old_conds[key]]
+      def merge_ranges(old, new)
+        constraints = [new, old]
         data = constraints.map do |c|
           match = RANGE_REGEX.match(c)
           match.nil? ? [nil, c] : [match[1], match[2]]

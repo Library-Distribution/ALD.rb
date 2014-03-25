@@ -50,6 +50,9 @@ module ALD
       # 'version-min=0.2.1&version-max=3.4.5'
       RANGE_CONDITIONS = %w[version downloads rating]
 
+      # Internal: filter conditions that allow specifying an array.
+      ARRAY_CONDITIONS = %w[tags]
+
       # Public: Filter and/or sort this collection and return a new collection
       # containing a subset of its items.
       #
@@ -88,20 +91,7 @@ module ALD
       # this collection's conditions.
       def where(conditions)
         return self if conditions.nil? || conditions.empty?
-
-        new_conditions = @conditions.merge(conditions) do |key|
-          if RANGE_CONDITIONS.include?(key.to_s)
-            merge_ranges(@conditions, conditions, key) # handle merging for cases like 'downloads >= 5' and 'downloads <= 9' etc.
-          elsif key == :range # not a "range condition" in the sense used above
-            range_offset(conditions[:range])
-          elsif key == :tags
-            @conditions[:tags] << conditions[:tags]
-          elsif key == :sort
-            conditions[key] # enable re-sorting
-          else
-            raise ArgumentError # for other overwrites fail!
-          end
-        end
+        new_conditions = merge_conditions(conditions)
 
         data = nil
         if initialized? && LocalFilter.can_filter?(conditions)

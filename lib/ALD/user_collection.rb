@@ -39,6 +39,9 @@ module ALD
       # Internal: filter conditions that allow specifying a range. See #where.
       RANGE_CONDITIONS = %w[joined]
 
+      # Internal: filter conditions that allow specifying an array.
+      ARRAY_CONDITIONS = %w[privileges]
+
       # Public: Return a new collection containing a subset of the users in
       # this collection.
       #
@@ -64,20 +67,7 @@ module ALD
       # current ones.
       def where(conditions)
         return self if conditions.nil? || conditions.empty?
-
-        new_conditions = @conditions.merge(conditions) do |key|
-          if RANGE_CONDITIONS.include?(key.to_s)
-            merge_ranges(@conditions, conditions, key)
-          elsif key == :range # not a "range condition" in the sense used above
-            range_offset(conditions[:range])
-          elsif key == :privileges
-            @conditions[:privileges] << conditions[privileges]
-          elsif key == :sort
-            conditions[key] # enable re-sorting
-          else
-            raise ArgumentError # for other overwrites fail!
-          end
-        end
+        new_conditions = merge_conditions(conditions)
 
         # todo: filter locally if possible
 
