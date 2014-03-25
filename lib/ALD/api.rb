@@ -114,7 +114,7 @@ module ALD
     def item(*args)
       if args.length == 1
         if args.first.is_a? String # GUID
-          items[args.first]
+          @item_store[normalize_id(args.first)] || items[args.first]
         elsif args.first.is_a? Hash # used internally to avoid multiple Item instances
           args.first['id'] = normalize_id(args.first['id'])
           @item_store[args.first['id']] ||= Item.new(self, args.first)
@@ -153,7 +153,7 @@ module ALD
     def user(*args)
       if args.length == 1
         if args.first.is_a? String
-          users[args.first]
+          @user_store[normalize_id(args.first)] || users[args.first]
         elsif args.first.is_a? Hash
           args.first['id'] = normalize_id(args.first['id'])
           @user_store[args.first['id']] ||= User.new(self, args.first)
