@@ -121,7 +121,7 @@ module ALD
         constraints = [new_conds[key], old_conds[key]]
         data = constraints.map do |c|
           match = RANGE_REGEX.match(c)
-          c.nil? ? [nil, c] : [match[1], match[2]]
+          match.nil? ? [nil, c] : [match[1], match[2]]
         end
         ops, values = data.map(&:first), data.map(&:last)
 
