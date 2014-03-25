@@ -125,35 +125,12 @@ module ALD
       # Returns nothing.
       def request
         data = {}
-        %w[name user type].each { |cond| data[cond] = @conditions[cond.to_sym] if @conditions.key?(cond.to_sym) } # literal conditions
-
-        %w[stable reviewed].each do |cond| # field switches
-          if @conditions.key?(cond.to_sym)
-            data[cond] = {true => 'true', false => 'false', nil => 'both'}[@conditions[key.to_sym]]
-          end
-        end
-
-        %w[downloads rating version].each do |cond| # range conditions
-          if @conditions.key?(cond.to_sym)
-            fields = @conditions[cond.to_sym].is_a?(Array) ? @conditions[cond.to_sym] : [@conditions[cond.to_sym]]
-            fields.each do |field|
-              match = RANGE_REGEX.match(field)
-              if match.nil? # just a specific field
-                data[cond] = field
-              else # min or max
-                data["#{cond}-#{match[1] == '>=' ? 'min' : 'max'}"] = match[2]
-              end
-            end
-          end
-        end
-
-        data['tags'] = @conditions[:tags].join(',') if @conditions.key?(:tags)
-        data['sort'] = @conditions[:sort].map { |k, dir| "#{dir == :desc ? '-' : ''}#{k}" }.join(',') if @conditions.key(:sort)
-
-        if @conditions.key?(:range)
-          data['start'] = @conditions[:range].min
-          data['count'] = @conditions[:range].max - @conditions[:range].min + 1
-        end
+          .merge(exact_queries(%w[name user type]))
+          .merge(switch_queries(%w[stable reviewed]))
+          .merge(array_queries(%w[tags]))
+          .merge(range_condition_queries(%w[downloads rating version]))
+          .merge(sort_query)
+          .merge(range_query)
 
         url = "/items/#{data.empty? ? '' : '?'}#{URI.encode_www_form(data)}"
         @data = @api.request(url).map do |hash|

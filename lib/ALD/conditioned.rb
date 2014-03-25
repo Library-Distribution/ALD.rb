@@ -6,6 +6,105 @@ module ALD
     module Conditioned
       private
 
+      # Internal: The HTTP query conditions for the range specified in the
+      # instance's conditions.
+      #
+      # Returns a Hash, that contains the query parameters matching the range
+      # specified in the conditions, or an empty Hash if there is no range
+      # specified.
+      def range_query
+        data = {}
+        if @conditions.key?(:range)
+          data['start'] = @conditions[:range].min
+          data['count'] = @conditions[:range].max - @conditions[:range].min + 1
+        end
+        data
+      end
+
+      # Internal: The HTTP query conditions for the sorting specified in the
+      # instance's conditions.
+      #
+      # Returns a Hash containing the query parameters matching the specified
+      # sorting, or an empty Hash if there's no sorting specified.
+      def sort_query
+        Hash[
+          present_conditions(%w[sort]).map { |cond| [cond, @conditions[cond.to_sym].map { |k, dir| "#{dir == :desc ? '-' : ''}#{k}" }.join(',')] }
+        ]
+      end
+
+      # Internal: The HTTP query conditions for exact queries for a set of
+      # given conditions.
+      #
+      # conds - an Array of Strings, containing the condition names to handle
+      #
+      # Returns a Hash with the query parameters matching the instance's values
+      # on the specified conditions, or an empty Hash, if there are none.
+      def exact_queries(conds)
+        Hash[
+          present_conditions(conds).map { |cond| [cond, @conditions[cond.to_sym]] }
+        ]
+      end
+
+      # Internal: The HTTP query conditions for queries for an array of values
+      # for the given conditions.
+      #
+      # conds - an Array of Strings, containing the condition names to handle
+      #
+      # Returns a Hash with the query parameters matching the instance's values
+      # on the specified conditions, or an empty Hash.
+      def array_queries(conds)
+        Hash[
+          present_conditions(conds).map { |cond| [cond, @conditions[cond.to_sym].join(',')] }
+        ]
+      end
+
+      # Internal: The HTTP query conditions for queries with conditions that
+      # can be switched on, off or indeterminate.
+      #
+      # conds - an Array of Strings, containing the condition names to handle
+      #
+      # Returns a Hash with the query parameters matching the instance's values
+      # on the specified conditions, or an empty Hash.
+      def switch_queries(conds)
+        map = {true => 'true', false => 'false', nil => 'both'}
+        Hash[
+          present_conditions(conds).map { |cond| [cond, map[@conditions[cond.to_sym]]] }
+        ]
+      end
+
+      # Internal: The HTTP query conditions for queries with conditions that
+      # allow specifying a range of values.
+      #
+      # conds - an Array of Strings, containing the condition names to handle
+      #
+      # Returns a Hash with the query parameters matching the instance's values
+      # on the specified conditions, or an empty Hash.
+      def range_condition_queries(conds)
+        Hash[
+          present_conditions(conds).map { |cond|
+            fields = @conditions[cond.to_sym].is_a?(Array) ? @conditions[cond.to_sym] : [@conditions[cond.to_sym]]
+            fields.map do |field|
+              match = RANGE_REGEX.match(field)
+              if match.nil? # just a specific field
+                [cond, field]
+              else # min or max
+                ["#{cond}-#{match[1] == '>=' ? 'min' : 'max'}", match[2]]
+              end
+            end
+          }.flatten(1)
+        ]
+      end
+
+      # Internal: Get the subset of conditions that are present on the instance
+      #
+      # conds - an Array of Strings, containing the condition names to check
+      #
+      # Returns an Array of Strings with a subset of the given conds, namely
+      # those that are present on @conditions.
+      def present_conditions(conds)
+        conds.select { |cond| @conditions.key?(cond.to_sym) }
+      end
+
       # Internal: A regex to determine if a range condition is specifying a range.
       RANGE_REGEX = /^\s*(<\=|>\=)\s*(.*)$/
 
