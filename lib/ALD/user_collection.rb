@@ -91,7 +91,17 @@ module ALD
       #
       # Returns nothing.
       def request
-        # todo
+        data = {}
+          .merge(range_condition_queries(%w[joined]))
+          .merge(array_queries(%w[privileges]))
+          .merge(sort_query)
+          .merge(range_query)
+
+        url = "/items/#{data.empty? ? '' : '?'}#{URI.encode_www_form(data)}"
+        @data = @api.request(url).map do |hash|
+          hash['id'] = @api.normalize_id(hash['id'])
+          hash
+        end
       end
 
       # Internal: Used by Collection#each and Collection#[] to create new users.
