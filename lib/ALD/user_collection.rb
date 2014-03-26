@@ -42,6 +42,9 @@ module ALD
       # Internal: filter conditions that allow specifying an array.
       ARRAY_CONDITIONS = %w[privileges]
 
+      # Internal: filter conditions that can be handled locally.
+      LOCAL_CONDITIONS = %w[name]
+
       # Public: Return a new collection containing a subset of the users in
       # this collection.
       #
@@ -65,14 +68,10 @@ module ALD
       #
       # Raises ArgumentError if the new conditions are incompatible with the
       # current ones.
-      def where(conditions)
-        return self if conditions.nil? || conditions.empty?
-        new_conditions = merge_conditions(conditions)
-
-        # todo: filter locally if possible
-
-        UserCollection::new(@api, new_conditions)
-      end
+      #
+      # Signature
+      #
+      #   where(conditions)
 
       private
 

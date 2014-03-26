@@ -4,6 +4,23 @@ module ALD
     #
     # Requires @conditions to be the instance's condition Hash.
     module Conditioned
+      # Public: Filter the Collection's data.
+      # See the documentation on the individual classes for more information.
+      def where(conditions)
+        return self if conditions.nil? || conditions.empty?
+        new_conditions = merge_conditions(conditions)
+
+        if initialized? && Collection::LocalFilter.can_apply?(conditions, self.class::LOCAL_CONDITIONS)
+          self.class::new(
+            @api,
+            new_conditions,
+            Collection::LocalFilter.apply_conditions(@data, conditions)
+          )
+        else
+          self.class::new(@api, new_conditions)
+        end
+      end
+
       private
 
       # Internal: The HTTP query conditions for the range specified in the

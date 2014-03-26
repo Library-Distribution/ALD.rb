@@ -53,6 +53,9 @@ module ALD
       # Internal: filter conditions that allow specifying an array.
       ARRAY_CONDITIONS = %w[tags]
 
+      # Internal: filter conditions that can be handled locally.
+      LOCAL_CONDITIONS = %w[name] # todo: add version once LocalFilter supports semver
+
       # Public: Filter and/or sort this collection and return a new collection
       # containing a subset of its items.
       #
@@ -89,21 +92,10 @@ module ALD
       #
       # Raises ArgumentError if the conditions are invalid or incompatible with
       # this collection's conditions.
-      def where(conditions)
-        return self if conditions.nil? || conditions.empty?
-        new_conditions = merge_conditions(conditions)
-
-        # todo: add version to local keys once LocalFilter supports semver
-        if initialized? && LocalFilter.can_apply?(conditions, %w[name])
-          ItemCollection::new(
-            @api,
-            new_conditions,
-            LocalFilter.apply_conditions(@data, conditions)
-          )
-        else
-          ItemCollection::new(@api, new_conditions)
-        end
-      end
+      #
+      # Signature
+      #
+      #   where(conditions)
 
       private
 
