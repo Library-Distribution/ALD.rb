@@ -1,33 +1,55 @@
 module ALD
   class API
-    class ItemCollection < Collection
-      # Internal: Used by ItemCollection#where to filter items locally if
-      # possible. All methods are module methods.
+    class Collection
+      # Internal: Used by ItemCollection/UserCollection#where to filter data
+      # locally if possible. All methods are module methods.
       module LocalFilter
+        # Internal: Apply certain conditions on given data. This is a wrapper
+        # method that calls ::filter, ::sort (if necessary) and applies a :range
+        # condition (if specified).
+        #
+        # data       - an Array of Hashes representing the entries to apply
+        #              conditions upon
+        # conditions - the Hash of conditions to apply
+        #
+        # Returns the modified data Array.
+        #
+        # Raises ArgumentError if the conditions cannot be applied. This can be
+        # avoided by passing them to ::can_apply? beforehand.
+        def self.apply_conditions(data, conditions)
+          data = filter(data, conditions)
+          data = sort(data, conditions[:sort])  if conditions.key?(:sort)
+          data = data.slice(conditions[:range]) if conditions.key?(:range)
+          data
+        end
+
         # Internal: Test if the given filter, sort and range conditions can be
-        # handled locally or need a request to the server.
+        # applied locally or need a request to the server.
         #
         # conditions - a Hash of conditions to test
+        # local_keys - an Array of Strings or Symbols, containing the key names
+        #              that are available locally
+        #              Related: CollectionEntry::initialized_attributes
         #
-        # Returns a Boolean; true if local filtering is possible, false
+        # Returns a Boolean; true if local application is possible, false
         # otherwise
-        def self.can_filter?(conditions)
-          conditions.keys.all? do |key|
-            case key
-              when :name, :range #, :version, :stable # todo: enable with semver
-                true # these are always available and can be filtered by
-              when :sort
-                criteria = conditions[:sort].is_a?(Hash) ? conditions[:sort].keys : conditions
-                criteria.all? { |c| [:name].include?(c) } # these sort fields are available # todo: enable semver and add :version
-              else
-                false
+        def self.can_apply?(conditions, local_keys)
+          local_keys.map!(&:to_sym) # symbolize keys
+
+          conditions.all? do |key, value|
+            if key == :sort
+              sort_criteria(value).all? { |c| local_keys.include?(c) }
+            else
+              local_keys.include?(key) || key == :range # range is always supported
             end
           end
         end
 
-        # Internal: Filter the given data locally
+        # Internal: Filter the given data locally. This does not support range
+        # or switch conditions. Array conditions also only work if the values
+        # are exactly the same, i.e. the same entries in the same order.
         #
-        # data       - an Array of Hashes representing the items to filter
+        # data       - an Array of Hashes representing the entries to filter
         # conditions - a Hash of conditions to filter for
         #
         # Returns the filtered data array
@@ -37,14 +59,12 @@ module ALD
         def self.filter(data, conditions)
           data.select do |entry|
             conditions.all? do |key, value|
-              case key
-                when :name
-                  entry[key.to_s] == value
-                # todo: when :version
-                when :sort, :range
-                  true # do that somewhere else
-                else
-                  raise ArgumentError # should be prevented by can_filter?
+              if [:sort, :range].include?(key)
+                true # must be done somewhere else
+              elsif entry.key?(key.to_s) # should be a locally available key
+                entry[key.to_s] == value
+              else
+                raise ArgumentError  # should be prevented by can_filter?
               end
             end
           end
@@ -52,7 +72,7 @@ module ALD
 
         # Internal: Sort the given data locally
         #
-        # data - the Array of Hashes representing items
+        # data - the Array of Hashes representing entries
         # sort - either: a Hash, associating sorting criteria (symbols) to
         #        sorting direction (:asc ord :desc); or an Array of Symbols
         #        representing sorting criteria (direction defaults to :asc)
@@ -61,23 +81,37 @@ module ALD
         def self.sort(data, sort)
           sort = to_sort_hash(sort)
           data.sort do |a, b|
-            sort.map { |key, dir| # map criteria and direction to +1/0/-1 sorting information
-              if a[key.to_s] > b[key.to_s]
-                dir == :asc ? +1 : -1
-              elsif a[key.to_s] < b[key.to_s]
-                dir == :asc ? -1 : +1;
-              else
-                0
-              end
-            }.find(0) { |s| s != 0 } # use highest-priority (i.e. first) sorting info != 0
+            self.sortings(sort, a, b).find(0) { |s| s != 0 } # use highest-priority (i.e. first) sorting info != 0
           end
         end
 
-        # Internal: Create a sorting hash from an array
+        # Internal: Get the sort order for given criteria.
+        #
+        # sort - a Hash as described in ::sort
+        # a, b - the Hashes to compare
+        #
+        # Returns an Array of Integers (-1, 0, +1), where each represents the
+        # sort order for one of the sort keys.
+        def self.sortings(sort, a, b)
+          sort.map do |key, dir|
+            key = key.to_s
+            # todo: support semver for :version key
+            if a[key] > b[key]
+              dir == :asc ? +1 : -1
+            elsif a[key] < b[key]
+              dir == :asc ? +1 : -1
+            else
+              0
+            end
+          end
+        end
+        private_class_method :sortings
+
+        # Internal: Create a sorting Hash from an Array.
         #
         # sort - a Hash or Array, in the format described in ::sort
         #
-        # Returns a Hash, in the format described in ::sort
+        # Returns a Hash, in the format described in ::sort.
         def self.to_sort_hash(sort)
           if sort.is_a?(Hash)
             sort
@@ -86,6 +120,16 @@ module ALD
           end
         end
         private_class_method :to_sort_hash
+
+        # Internal: The inverse of ::to_sort_hash.
+        #
+        # sort - an Array or Hash, in the format described in ::sort
+        #
+        # Returns an Array, in the format described in ::sort.
+        def self.sort_criteria(sort)
+          sort.is_a?(Hash) ? sort.keys : sort
+        end
+        private_class_method :sort_criteria
       end
     end
   end

@@ -93,17 +93,15 @@ module ALD
         return self if conditions.nil? || conditions.empty?
         new_conditions = merge_conditions(conditions)
 
-        data = nil
-        if initialized? && LocalFilter.can_filter?(conditions)
-          data = LocalFilter.filter(@data, conditions)
-          data = LocalFilter.sort(data, conditions[:sort]) if conditions.key?(:sort)
-          data = data.slice(conditions[:range]) if conditions.key?(:range)
-        end
-
-        if data.nil?
-          ItemCollection::new(@api, new_conditions)
+        # todo: add version to local keys once LocalFilter supports semver
+        if initialized? && LocalFilter.can_apply?(conditions, %w[name])
+          ItemCollection::new(
+            @api,
+            new_conditions,
+            LocalFilter.apply_conditions(@data, conditions)
+          )
         else
-          ItemCollection::new(@api, new_conditions, data)
+          ItemCollection::new(@api, new_conditions)
         end
       end
 
