@@ -1,3 +1,5 @@
+require 'semantic'
+
 module ALD
   class API
     class Collection
@@ -95,14 +97,12 @@ module ALD
         def self.sortings(sort, a, b)
           sort.map do |key, dir|
             key = key.to_s
-            # todo: support semver for :version key
-            if a[key] > b[key]
-              dir == :asc ? +1 : -1
-            elsif a[key] < b[key]
-              dir == :asc ? +1 : -1
+            if key == 'version'
+              result = Semantic::Version.new(a[key]) <=> Semantic::Version.new(b[key])
             else
-              0
+              result = a[key] <=> b[key]
             end
+            dir == :asc ? result : -result
           end
         end
         private_class_method :sortings

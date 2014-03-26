@@ -117,6 +117,18 @@ class TestApiItems < Test::Unit::TestCase
     assert_requested(@stub, times: 1) # filtering was done locally
   end
 
+  def test_where_sort_local
+    api.items[0] # force request
+    assert_requested(@stub, times: 1) # make sure it was requested
+
+    # real test starts here:
+    assert_equal '2.3.4', api.items(sort: { version: :desc }).first.version, "API#items returned wrong version sorting"
+    assert_requested(@stub, times: 1) # sorting was done locally
+
+    assert_equal 'OtherItem', api.items(sort: [:name]).first.name, "API#items returned wrong name sorting"
+    assert_requested(@stub, times: 1) # sorting was done locally
+  end
+
   def test_where_range
     items = api.items(range: (1..2)).where(range: (1..1))
     assert_equal 1, items.count, "ItemCollection#where returned empty collection for :range"

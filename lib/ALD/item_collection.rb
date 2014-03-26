@@ -54,7 +54,7 @@ module ALD
       ARRAY_CONDITIONS = %w[tags]
 
       # Internal: filter conditions that can be handled locally.
-      LOCAL_CONDITIONS = %w[name] # todo: add version once LocalFilter supports semver
+      LOCAL_CONDITIONS = %w[name version]
 
       # Public: Filter and/or sort this collection and return a new collection
       # containing a subset of its items.
