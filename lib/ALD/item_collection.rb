@@ -104,13 +104,14 @@ module ALD
       #
       # Returns nothing.
       def request
-        data = {}
-          .merge(exact_queries(%w[name user type]))
-          .merge(switch_queries(%w[stable reviewed]))
-          .merge(array_queries(%w[tags]))
-          .merge(range_condition_queries(%w[downloads rating version]))
-          .merge(sort_query)
-          .merge(range_query)
+        data = [
+          exact_queries(%w[name user type]),
+          switch_queries(%w[stable reviewed]),
+          array_queries(%w[tags]),
+          range_condition_queries(%w[downloads rating version]),
+          sort_query,
+          range_query
+        ].reduce({}, :merge)
 
         url = "/items/#{data.empty? ? '' : '?'}#{URI.encode_www_form(data)}"
         @data = @api.request(url).map do |hash|

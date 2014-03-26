@@ -80,11 +80,12 @@ module ALD
       #
       # Returns nothing.
       def request
-        data = {}
-          .merge(range_condition_queries(%w[joined]))
-          .merge(array_queries(%w[privileges]))
-          .merge(sort_query)
-          .merge(range_query)
+        data = [
+          range_condition_queries(%w[joined]),
+          array_queries(%w[privileges]),
+          sort_query,
+          range_query
+        ].reduce({}, :merge)
 
         url = "/items/#{data.empty? ? '' : '?'}#{URI.encode_www_form(data)}"
         @data = @api.request(url).map do |hash|
