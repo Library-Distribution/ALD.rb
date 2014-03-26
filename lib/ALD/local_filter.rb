@@ -81,7 +81,7 @@ module ALD
         def self.sort(data, sort)
           sort = to_sort_hash(sort)
           data.sort do |a, b|
-            self.sortings(sort, a, b).find(0) { |s| s != 0 } # use highest-priority (i.e. first) sorting info != 0
+            sortings(sort, a, b).find { |s| s != 0 } || 0 # use highest-priority (i.e. first) sorting info != 0
           end
         end
 
