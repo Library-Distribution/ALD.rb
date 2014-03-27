@@ -129,6 +129,11 @@ class TestApiItems < Test::Unit::TestCase
     assert_requested(@stub, times: 1) # sorting was done locally
   end
 
+  def test_where_range_merging
+    items = api.items(version: '>= 1.0.0').where(version: '>= 1.0.0-pre')
+    assert_equal '>= 1.0.0', items.instance_variable_get('@conditions')[:version]
+  end
+
   def test_where_range
     items = api.items(range: (1..2)).where(range: (1..1))
     assert_equal 1, items.count, "ItemCollection#where returned empty collection for :range"

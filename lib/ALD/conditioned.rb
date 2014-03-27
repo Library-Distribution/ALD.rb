@@ -1,3 +1,5 @@
+require 'semantic'
+
 module ALD
   class API
     # Internal: used by Collection classes to work with special conditions in #where.
@@ -132,7 +134,7 @@ module ALD
       def merge_conditions(conditions)
         @conditions.merge(conditions) do |key, old_value, new_value|
           if self.class::RANGE_CONDITIONS.include?(key.to_s)
-            merge_ranges(old_value, new_value) # handle merging for cases like 'downloads >= 5' and 'downloads <= 9' etc.
+            merge_ranges(key, old_value, new_value) # handle merging for cases like 'downloads >= 5' and 'downloads <= 9' etc.
           elsif self.class::ARRAY_CONDITIONS.include?(key.to_s)
             old_value + new_value
           elsif key == :range # not a "range condition" in the sense used above
@@ -150,17 +152,24 @@ module ALD
 
       # Internal: Handle condition conflicts for range conditions. Used by #where.
       #
+      # key - the Symbol key whose range is merged
       # old - the old range condition value
       # new - the new range condition value to be applied on top of the old one
       #
       # Returns the value that should be used in the merged conditions.
       #
       # Raises ArgumentError if the conflict cannot be resolved.
-      def merge_ranges(old, new)
+      def merge_ranges(key, old, new)
         constraints = [new, old]
         data = constraints.map do |c|
           match = RANGE_REGEX.match(c)
-          match.nil? ? [nil, c] : [match[1], match[2]]
+          if match.nil?
+            [nil, c]
+          elsif key == :version
+            [match[1], Semantic::Version.new(match[2])]
+          else
+            [match[1], match[2]]
+          end
         end
         ops, values = data.map(&:first), data.map(&:last)
 
@@ -168,7 +177,7 @@ module ALD
           constraints # => keep both
 
         elsif ops.none?(&:'nil?') # two range constraints of same type
-          ops[0] == '>=' ? ">= #{values.max}" : "<= #{values.min}" # todo: handle semver
+          ops[0] == '>=' ? ">= #{values.max.to_s}" : "<= #{values.min.to_s}"
 
         else # two exact values
           if constraints[0].strip == constraints[1].strip # if both are the same, just keep one
