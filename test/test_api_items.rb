@@ -1,15 +1,7 @@
 require 'helper'
-require 'ALD/api'
 require 'json'
-require 'webmock/test_unit'
 
-class TestApiItems < Test::Unit::TestCase
-  API_URL = 'http://localhost/'
-
-  def api
-    @api ||= ALD::API.new(API_URL)
-  end
-
+class TestApiItems < APITestCase
   def item_data
     @item_data ||= [
       { name: 'TestItem',  version: '0.0.1', id: 'de4e651033d64ca39fdb3761f34cecea' },
@@ -18,9 +10,11 @@ class TestApiItems < Test::Unit::TestCase
     ]
   end
 
+  ITEM_ID_REGEX = /items\/([0-9a-fA-F]{32})\/?$/
+  ITEM_NAME_VERSION_REGEX = /items\/([\w_]+)\/(.+)\/?$/
+
   def setup
-    @stub = stub_request(:get, API_URL + 'items/').with(query: hash_including({})).to_return do |request|
-      item_data = self.item_data
+    @stub = stub('items/', self.item_data) do |request, item_data|
       query = request.uri.query_values || {}
 
       # simulate server behaviour for 'start' and 'count' params
@@ -30,28 +24,20 @@ class TestApiItems < Test::Unit::TestCase
       # simulate server behaviour for 'name' filter
       item_data.select! { |item| item[:name] == query['name'] } if query.key?('name')
 
-      {
-        status: 200,
-        headers: { 'Content-type' => 'application/json' },
-        body: JSON.generate(item_data)
-      }
+      JSON.generate(item_data)
     end
-    stub_request(:get, /^#{Regexp.escape(API_URL)}items\/([0-9a-fA-F]{32})\/?$/).to_return do |request|
-      /items\/([0-9a-fA-F]{32})\/?$/ =~ request.uri.to_s
-      { status: 200, headers: { 'Content-type' => 'application/json' }, body: JSON.generate(item_data.find { |item| item[:id] =~ /#{$~[1]}/i }) }
+    stub(ITEM_ID_REGEX, self.item_data) do |request, item_data|
+      ITEM_ID_REGEX =~ request.uri.to_s
+      JSON.generate(item_data.find { |item| item[:id] =~ /#{$~[1]}/i })
     end
-    stub_request(:get, /^#{Regexp.escape(API_URL)}items\/([\w_]+)\/(.+)\/?$/).to_return do |request|
-      /items\/([\w_]+)\/(.+)\/?$/ =~ request.uri.to_s
-      { status: 200, headers: { 'Content-type' => 'application/json' }, body: JSON.generate(item_data.find { |item| item[:name] == $~[1] && item[:version] == $~[2] }) }
+    stub(ITEM_NAME_VERSION_REGEX, self.item_data) do |request, item_data|
+      ITEM_NAME_VERSION_REGEX =~ request.uri.to_s
+      JSON.generate(item_data.find { |item| item[:name] == $~[1] && item[:version] == $~[2] })
     end
   end
 
   def test_empty_items
-    stub_request(:get, API_URL + 'items/').with(query: hash_including({})).to_return(
-      status: 200,
-      headers: { 'Content-type' => 'application/json' },
-      body: '[]'
-    )
+    stub('items/', '[]')
 
     assert_not_nil api.items, "Empty list of all items is nil"
     assert_equal ALD::API::ItemCollection, api.items.class, "Empty item list is no ItemCollection"

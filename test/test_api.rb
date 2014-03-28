@@ -1,15 +1,7 @@
 require 'helper'
-require 'ALD/api'
 require 'json'
-require 'webmock/test_unit'
 
-class ApiTest < Test::Unit::TestCase
-  API_URL = 'http://localhost/'
-
-  def api
-    @api ||= ALD::API.new(API_URL)
-  end
-
+class ApiTest < APITestCase
   def test_invalid_auth
     invalid_auths = [nil, {}, { name: 'user' }, { password: 'pw' }]
     invalid_auths.each do |auth|
@@ -28,11 +20,7 @@ class ApiTest < Test::Unit::TestCase
   end
 
   def test_version
-    stub_request(:get, API_URL + "version").to_return(
-      status: 200,
-      headers: { 'Content-type' => 'application/json' },
-      body: JSON.generate({ 'version' => '4.5.0-pre' })
-    )
+    stub('version', JSON.generate('version' => '4.5.0-pre'))
 
     assert_equal '4.5.0-pre', api.version
   end

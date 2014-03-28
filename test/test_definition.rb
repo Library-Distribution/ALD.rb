@@ -1,5 +1,4 @@
 require 'helper'
-require 'ALD/definition'
 require 'nokogiri'
 
 class DefinitionTest < Test::Unit::TestCase
