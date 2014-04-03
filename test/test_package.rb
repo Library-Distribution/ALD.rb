@@ -1,6 +1,5 @@
 require 'helper'
-require 'test/unit'
-require 'ALD'
+require 'ALD/package'
 require 'zip'
 
 class PackageTest < Test::Unit::TestCase

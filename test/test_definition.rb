@@ -1,7 +1,6 @@
 require 'helper'
-require 'test/unit'
-require 'nokogiri'
 require 'ALD/definition'
+require 'nokogiri'
 
 class DefinitionTest < Test::Unit::TestCase
   def setup
