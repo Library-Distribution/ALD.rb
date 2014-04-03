@@ -27,12 +27,12 @@ class TestApiItems < APITestCase
       JSON.generate(item_data)
     end
     stub(ITEM_ID_REGEX, self.item_data) do |request, item_data|
-      ITEM_ID_REGEX =~ request.uri.to_s
-      JSON.generate(item_data.find { |item| item[:id] =~ /#{$~[1]}/i })
+      match = ITEM_ID_REGEX.match(request.uri.to_s)
+      JSON.generate(item_data.find { |item| /#{match[1]}/i =~ item[:id] })
     end
     stub(ITEM_NAME_VERSION_REGEX, self.item_data) do |request, item_data|
-      ITEM_NAME_VERSION_REGEX =~ request.uri.to_s
-      JSON.generate(item_data.find { |item| item[:name] == $~[1] && item[:version] == $~[2] })
+      match = ITEM_NAME_VERSION_REGEX.match(request.uri.to_s)
+      JSON.generate(item_data.find { |item| item[:name] == match[1] && item[:version] == match[2] })
     end
   end
 
