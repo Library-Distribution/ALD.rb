@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ALD::API::ItemCollection - RDoc Documentation</title>
+
+<link href="../../fonts.css" rel="stylesheet">
+<link href="../../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/navigation.js"></script>
+<script src="../../js/search_index.js"></script>
+<script src="../../js/search.js"></script>
+<script src="../../js/searcher.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    <div id="sections-section" class="nav-section">
+  <h3>Sections</h3>
+
+  <ul class="link-list" role="directory">
+    
+      <li><a href="#5Buntitled-5D"></a></li>
+    
+      <li><a href="#Public">Public</a></li>
+    
+      <li><a href="#Internal">Internal</a></li>
+    
+  </ul>
+</div>
+
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="Collection.html">ALD::API::Collection</a>
+  
+</div>
+
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="Conditioned.html">ALD::API::Conditioned</a>
+  
+  
+  </ul>
+</div>
+
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-5B-5D">#[]</a>
+    
+    <li ><a href="#method-i-entry">#entry</a>
+    
+    <li ><a href="#method-i-entry_filter">#entry_filter</a>
+    
+    <li ><a href="#method-i-request">#request</a>
+    
+    <li ><a href="#method-i-request_entry">#request_entry</a>
+    
+    <li ><a href="#method-i-where">#where</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ALD::API::ItemCollection">
+  <h1 id="class-ALD::API::ItemCollection" class="class">
+    class ALD::API::ItemCollection
+  </h1>
+
+  <section class="description">
+    
+<p>Represents a (possibly filtered) set of items on an ALD server</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+  
+  
+  <section id="Public" class="documentation-section">
+    
+    <header class="documentation-section-title">
+      <h2>
+        Public
+      </h2>
+      <span class="section-click-top">
+        <a href="#top">&uarr; top</a>
+      </span>
+    </header>
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-Public-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-5B-5D" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            [](id)
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            [](name, version)
+          </span>
+          
+        </div>
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            [](index)
+          </span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Access an individual item by ID, name and version or index in the
+collection. This method may trigger a HTTP request.</p>
+
+<h3 id="method-i-5B-5D-label-Examples">Examples<span><a href="#method-i-5B-5D-label-Examples">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">items</span>[<span class="ruby-string">&#39;185d265f24654545aad3f88e8a383339&#39;</span>] <span class="ruby-comment"># access the item with this ID</span>
+<span class="ruby-identifier">items</span>[<span class="ruby-string">&#39;MyApp&#39;</span>, <span class="ruby-string">&#39;0.1.2&#39;</span>] <span class="ruby-comment"># access a specific version of an item</span>
+<span class="ruby-identifier">items</span>[<span class="ruby-value">4</span>] <span class="ruby-comment"># access the 5th item in the collection (zero-based index)</span>
+         <span class="ruby-comment"># This makes most sense in an explicitly ordered collection</span>
+</pre>
+
+<h3 id="method-i-5B-5D-label-Returns">Returns<span><a href="#method-i-5B-5D-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns the corresponding <a href="Item.html">ALD::API::Item</a> instance,
+or nil if not found</p>
+
+<h3 id="method-i-5B-5D-label-Signature">Signature<span><a href="#method-i-5B-5D-label-Signature">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+<dl class="rdoc-list note-list"><dt>id
+<dd>
+<p>a GUID String uniquely identifying the item</p>
+</dd><dt>name
+<dd>
+<p>a String containing the item&#39;s name</p>
+</dd><dt>version
+<dd>
+<p>a String containing the item&#39;s semver version</p>
+</dd><dt>index
+<dd>
+<p>an Integer with the item&#39;s zero-based index within the collection.</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="5B-5D-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item_collection.rb, line 49</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="private-instance-Public-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-where" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            where(conditions)
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Filter and/or sort this collection and return a new collection containing a
+subset of its items.</p>
+<dl class="rdoc-list note-list"><dt>conditions
+<dd>
+<p>a Hash of conditions to filter for</p>
+<dl class="rdoc-list note-list"><dt>:name
+<dd>
+<p>filter for items with this name (String)</p>
+</dd><dt>:user
+<dd>
+<p>only return items by this user (given the user name or the ID) (String)</p>
+</dd><dt>:type
+<dd>
+<p>only return items of this type (String)</p>
+</dd><dt>:downloads
+<dd>
+<p>If given only a number, return only items with this number of downloads.
+More commonly, pass a string like &#39;&gt;= 4&#39; or &#39;&lt;= 5&#39;
+(or an array of such strings) to select items in a range of download
+counts.</p>
+</dd><dt>:rating
+<dd>
+<p>Select items with a given rating. Like for :downloads, ranges can be
+specified.</p>
+</dd><dt>:version
+<dd>
+<p>Only items with a given semver version number. Here as well, ranges can be
+specified. Semver rules are taken into account when sorting.</p>
+</dd><dt>:stable
+<dd>
+<p>Set to true to only return items whose semver version indicates they&#39;re
+stable.</p>
+</dd><dt>:reviewed
+<dd>
+<p>Set to true to filter for items that are marked as reviewed by the server.</p>
+</dd><dt>:tags
+<dd>
+<p>A tag or an array of tags to filter for.</p>
+</dd><dt>:sort
+<dd>
+<p>an Array of sorting criteria, in descending order of precedence; or a Hash
+where the keys are the sorting criteria, and the values (:asc, :desc)
+indicate sorting order.</p>
+</dd><dt>:range
+<dd>
+<p>A zero-based Range of items to return. This makes most sense in combination
+with sorting. Note that the range is relative to the collection the
+operation is performed upon.</p>
+</dd></dl>
+</dd></dl>
+
+<h3 id="method-i-where-label-Returns">Returns<span><a href="#method-i-where-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns a new <a href="ItemCollection.html">ItemCollection</a> instance (or
+self, if conditions is nil)</p>
+
+<p>Raises ArgumentError if the conditions are invalid or incompatible with
+this collection&#39;s conditions.</p>
+
+<h3 id="method-i-where-label-Signature">Signature<span><a href="#method-i-where-label-Signature">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+          
+          
+
+          
+          <div class="method-source-code" id="where-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item_collection.rb, line 102</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+
+  
+  
+  <section id="Internal" class="documentation-section">
+    
+    <header class="documentation-section-title">
+      <h2>
+        Internal
+      </h2>
+      <span class="section-click-top">
+        <a href="#top">&uarr; top</a>
+      </span>
+    </header>
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="ARRAY_CONDITIONS">ARRAY_CONDITIONS
+        
+        <dd><p>filter conditions that allow specifying an array.</p>
+        
+      
+        <dt id="LOCAL_CONDITIONS">LOCAL_CONDITIONS
+        
+        <dd><p>filter conditions that can be handled locally.</p>
+        
+      
+        <dt id="RANGE_CONDITIONS">RANGE_CONDITIONS
+        
+        <dd><p>filter conditions that allow specifying a range, like
+&#39;version-min=0.2.1&amp;version-max=3.4.5&#39;</p>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    
+     <section id="public-class-Internal-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(api, conditions = {}, data = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Create a new instance. This should not be called by library consumers.
+Instead use <a href="../API.html#method-i-items">ALD::API#items</a> or <a
+href="Conditioned.html#method-i-where">ALD::API::Conditioned#where</a> to
+get a new instance.</p>
+<dl class="rdoc-list note-list"><dt>api
+<dd>
+<p>the <a href="../API.html">ALD::API</a> instance this collection belongs to</p>
+</dd><dt>conditions
+<dd>
+<p>a Hash of conditions items in this collection must meet</p>
+</dd><dt>data
+<dd>
+<p>an Array of Hashes representing the items in this collection:</p>
+<dl class="rdoc-list note-list"><dt>id
+<dd>
+<p>the GUID of the item</p>
+</dd><dt>name
+<dd>
+<p>the item&#39;s name</p>
+</dd><dt>version
+<dd>
+<p>the item&#39;s semver version</p>
+</dd></dl>
+</dd></dl>
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="Collection.html#method-c-new">ALD::API::Collection.new</a>
+            </div>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item_collection.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">api</span>, <span class="ruby-identifier">conditions</span> = {}, <span class="ruby-identifier">data</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">api</span>, <span class="ruby-identifier">conditions</span>, <span class="ruby-identifier">data</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="private-instance-Internal-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-entry" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">entry</span><span
+            class="method-args">(hash, initialized = false)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Used by <a
+href="Collection.html#method-i-each">ALD::API::Collection#each</a> and <a
+href="Collection.html#method-i-5B-5D">ALD::API::Collection#[]</a> to create
+new items.</p>
+<dl class="rdoc-list note-list"><dt>hash
+<dd>
+<p>a Hash describing the item, with the keys &#39;id&#39;, &#39;name&#39; and
+&#39;version&#39;.</p>
+</dd><dt>initialized
+<dd>
+<p>a Boolean indicating if the given Hash already contains all information
+about the item or only name and id.</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="entry-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item_collection.rb, line 149</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">entry</span>(<span class="ruby-identifier">hash</span>, <span class="ruby-identifier">initialized</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-ivar">@api</span>.<span class="ruby-identifier">item</span>(<span class="ruby-identifier">hash</span>, <span class="ruby-identifier">initialized</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-entry_filter" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">entry_filter</span><span
+            class="method-args">(args)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Implements item access for <a
+href="Collection.html#method-i-5B-5D">ALD::API::Collection#[]</a>. See <a
+href="Collection.html#method-i-entry_filter">ALD::API::Collection#entry_filter</a>
+for more information.</p>
+
+<p><a href="ItemCollection.html">ItemCollection</a> allows access by ID
+(String) or name and version (both String).</p>
+          
+          
+
+          
+          <div class="method-source-code" id="entry_filter-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item_collection.rb, line 158</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">entry_filter</span>(<span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+    { <span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@api</span>.<span class="ruby-identifier">normalize_id</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>) }
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
+    { <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>, <span class="ruby-identifier">version</span><span class="ruby-operator">:</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span> }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-request" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">request</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Make a HTTP request to the ALD server to get the list of item hashes
+matching this collection&#39;s conditions.</p>
+
+<h3 id="method-i-request-label-Returns">Returns<span><a href="#method-i-request-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns nothing.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="request-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item_collection.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">request</span>
+  <span class="ruby-identifier">data</span> = [
+    <span class="ruby-identifier">exact_queries</span>(<span class="ruby-node">%w[name user type]</span>),
+    <span class="ruby-identifier">switch_queries</span>(<span class="ruby-node">%w[stable reviewed]</span>),
+    <span class="ruby-identifier">array_queries</span>(<span class="ruby-node">%w[tags]</span>),
+    <span class="ruby-identifier">range_condition_queries</span>(<span class="ruby-node">%w[downloads rating version]</span>),
+    <span class="ruby-identifier">sort_query</span>,
+    <span class="ruby-identifier">range_query</span>
+  ].<span class="ruby-identifier">reduce</span>({}, <span class="ruby-value">:merge</span>)
+
+  <span class="ruby-identifier">url</span> = <span class="ruby-node">&quot;/items/#{data.empty? ? &#39;&#39; : &#39;?&#39;}#{URI.encode_www_form(data)}&quot;</span>
+  <span class="ruby-ivar">@data</span> = <span class="ruby-ivar">@api</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">url</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">hash</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;id&#39;</span>] = <span class="ruby-ivar">@api</span>.<span class="ruby-identifier">normalize_id</span>(<span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;id&#39;</span>])
+    <span class="ruby-identifier">hash</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-request_entry" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">request_entry</span><span
+            class="method-args">(filter)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Make a HTTP request to the ALD server to get a single item. Used by <a
+href="Collection.html#method-i-5B-5D">ALD::API::Collection#[]</a>.</p>
+<dl class="rdoc-list note-list"><dt>filter
+<dd>
+<p>a filter Hash as returned by <a
+href="ItemCollection.html#method-i-entry_filter">#entry_filter</a></p>
+</dd></dl>
+
+<h3 id="method-i-request_entry-label-Returns">Returns<span><a href="#method-i-request_entry-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns a Hash with all information about the item.</p>
+
+<p>Raises ArgumentError if the filters cannot be handled.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="request_entry-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item_collection.rb, line 131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">request_entry</span>(<span class="ruby-identifier">filter</span>)
+  <span class="ruby-identifier">url</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:id</span>)
+    <span class="ruby-node">&quot;/items/#{filter[:id]}&quot;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-node">%w[name version]</span>.<span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_sym</span>) }
+    <span class="ruby-node">&quot;/items/#{filter[:name]}/#{filter[:version]}&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@api</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">url</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

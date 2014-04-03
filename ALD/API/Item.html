@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ALD::API::Item - RDoc Documentation</title>
+
+<link href="../../fonts.css" rel="stylesheet">
+<link href="../../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/navigation.js"></script>
+<script src="../../js/search_index.js"></script>
+<script src="../../js/search.js"></script>
+<script src="../../js/searcher.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    <div id="sections-section" class="nav-section">
+  <h3>Sections</h3>
+
+  <ul class="link-list" role="directory">
+    
+      <li><a href="#5Buntitled-5D"></a></li>
+    
+      <li><a href="#Public">Public</a></li>
+    
+      <li><a href="#Internal">Internal</a></li>
+    
+  </ul>
+</div>
+
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="CollectionEntry.html">ALD::API::CollectionEntry</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-initialized_attributes">::initialized_attributes</a>
+    
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-c-requested_attributes">::requested_attributes</a>
+    
+    <li ><a href="#method-c-valid_data-3F">::valid_data?</a>
+    
+    <li ><a href="#method-i-authors">#authors</a>
+    
+    <li ><a href="#method-i-description">#description</a>
+    
+    <li ><a href="#method-i-downloads">#downloads</a>
+    
+    <li ><a href="#method-i-item">#item</a>
+    
+    <li ><a href="#method-i-name">#name</a>
+    
+    <li ><a href="#method-i-ratings">#ratings</a>
+    
+    <li ><a href="#method-i-request">#request</a>
+    
+    <li ><a href="#method-i-reviewed">#reviewed</a>
+    
+    <li ><a href="#method-i-summary">#summary</a>
+    
+    <li ><a href="#method-i-tags">#tags</a>
+    
+    <li ><a href="#method-i-uploaded">#uploaded</a>
+    
+    <li ><a href="#method-i-user">#user</a>
+    
+    <li ><a href="#method-i-version">#version</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ALD::API::Item">
+  <h1 id="class-ALD::API::Item" class="class">
+    class ALD::API::Item
+  </h1>
+
+  <section class="description">
+    
+<p>An item (e.g. a library or app) uploaded to an ALD server.</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+  
+  
+  <section id="Public" class="documentation-section">
+    
+    <header class="documentation-section-title">
+      <h2>
+        Public
+      </h2>
+      <span class="section-click-top">
+        <a href="#top">&uarr; top</a>
+      </span>
+    </header>
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-Public-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-authors" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            authors()
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>get author information from the item. This method might trigger a HTTP
+request.</p>
+
+<h3 id="method-i-authors-label-Returns">Returns<span><a href="#method-i-authors-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns an Array of Hashes describing the authors.</p>
+
+<h3 id="method-i-authors-label-Signature">Signature<span><a href="#method-i-authors-label-Signature">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+          
+          
+
+          
+          <div class="method-source-code" id="authors-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item.rb, line 109</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-description" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            description()
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Get the item&#39;s description text. This method might trigger a HTTP
+request.</p>
+
+<h3 id="method-i-description-label-Returns">Returns<span><a href="#method-i-description-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns a String with the item&#39;s description.</p>
+
+<h3 id="method-i-description-label-Signature">Signature<span><a href="#method-i-description-label-Signature">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+          
+          
+
+          
+          <div class="method-source-code" id="description-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item.rb, line 63</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               </pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-downloads" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            downloads()
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Get the number of downloads for the item. This method might trigger a HTTP
+request.</p>
+
+<h3 id="method-i-downloads-label-Returns">Returns<span><a href="#method-i-downloads-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns an Integer indicating how often the item was downloaded.</p>
+
+<h3 id="method-i-downloads-label-Signature">Signature<span><a href="#method-i-downloads-label-Signature">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+          
+          
+
+          
+          <div class="method-source-code" id="downloads-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item.rb, line 91</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-item" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            item()
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Get the ID of the item.</p>
+
+<h3 id="method-i-item-label-Examples">Examples<span><a href="#method-i-item-label-Examples">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">id</span>
+</pre>
+
+<h3 id="method-i-item-label-Returns">Returns<span><a href="#method-i-item-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns a String of 32 characters, containing the item&#39;s GUID.</p>
+
+<h3 id="method-i-item-label-Signature">Signature<span><a href="#method-i-item-label-Signature">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+          
+          
+
+          
+          <div class="method-source-code" id="item-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item.rb, line 21</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                               </pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-name" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            name()
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Get the name of the item.</p>
+
+<h3 id="method-i-name-label-Examples">Examples<span><a href="#method-i-name-label-Examples">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Item: #{item.name}&quot;</span>
+</pre>
+
+<h3 id="method-i-name-label-Returns">Returns<span><a href="#method-i-name-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns a String containing the item name.</p>
+
+<h3 id="method-i-name-label-Signature">Signature<span><a href="#method-i-name-label-Signature">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+          
+          
+
+          
+          <div class="method-source-code" id="name-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item.rb, line 33</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-ratings" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            ratings()
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Get the ratings the item was given. This method might trigger a HTTP
+request.</p>
+
+<h3 id="method-i-ratings-label-Returns">Returns<span><a href="#method-i-ratings-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns an Array of Integers representing the ratings given to the item by
+users.</p>
+
+<h3 id="method-i-ratings-label-Signature">Signature<span><a href="#method-i-ratings-label-Signature">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+          
+          
+
+          
+          <div class="method-source-code" id="ratings-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item.rb, line 128</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   </pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-reviewed" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            reviewed()
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Get if the item has been marked as reviewed by the ALD server. This method
+might trigger a HTTP request.</p>
+
+<h3 id="method-i-reviewed-label-Returns">Returns<span><a href="#method-i-reviewed-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns a Boolean indicating if the item was revieed or not.</p>
+
+<h3 id="method-i-reviewed-label-Signature">Signature<span><a href="#method-i-reviewed-label-Signature">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+          
+          
+
+          
+          <div class="method-source-code" id="reviewed-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item.rb, line 82</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 </pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-summary" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            summary()
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Get the item&#39;s summary text. This method might trigger a HTTP request.</p>
+
+<h3 id="method-i-summary-label-Returns">Returns<span><a href="#method-i-summary-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns a String summarizing the item&#39;s purpose and contents.</p>
+
+<h3 id="method-i-summary-label-Signature">Signature<span><a href="#method-i-summary-label-Signature">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+          
+          
+
+          
+          <div class="method-source-code" id="summary-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item.rb, line 54</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   </pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-tags" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            tags()
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Get the tags the item was tagged with. This method might trigger a HTTP
+request.</p>
+
+<h3 id="method-i-tags-label-Returns">Returns<span><a href="#method-i-tags-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns an Array of Symbols representing the tags.</p>
+
+<h3 id="method-i-tags-label-Signature">Signature<span><a href="#method-i-tags-label-Signature">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+          
+          
+
+          
+          <div class="method-source-code" id="tags-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item.rb, line 100</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-uploaded" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            uploaded()
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Get the time the item was uploaded. This method might trigger a HTTP
+request.</p>
+
+<h3 id="method-i-uploaded-label-Returns">Returns<span><a href="#method-i-uploaded-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns a DateTime describing the time the item was first uploaded to the
+ALD server.</p>
+
+<h3 id="method-i-uploaded-label-Signature">Signature<span><a href="#method-i-uploaded-label-Signature">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+          
+          
+
+          
+          <div class="method-source-code" id="uploaded-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item.rb, line 73</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           </pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-user" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            user()
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Get the user who owns the item. This method might trigger a HTTP request.</p>
+
+<h3 id="method-i-user-label-Returns">Returns<span><a href="#method-i-user-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns the <a href="User.html">ALD::API::User</a> who owns the item.</p>
+
+<h3 id="method-i-user-label-Signature">Signature<span><a href="#method-i-user-label-Signature">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+          
+          
+
+          
+          <div class="method-source-code" id="user-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item.rb, line 118</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-version" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            version()
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Get the item version.</p>
+
+<h3 id="method-i-version-label-Examples">Examples<span><a href="#method-i-version-label-Examples">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{item.name} v#{item.version}&quot;</span>
+</pre>
+
+<h3 id="method-i-version-label-Returns">Returns<span><a href="#method-i-version-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns a String containing the version of the item.</p>
+
+<h3 id="method-i-version-label-Signature">Signature<span><a href="#method-i-version-label-Signature">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+          
+          
+
+          
+          <div class="method-source-code" id="version-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item.rb, line 45</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               </pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+
+  
+  
+  <section id="Internal" class="documentation-section">
+    
+    <header class="documentation-section-title">
+      <h2>
+        Internal
+      </h2>
+      <span class="section-click-top">
+        <a href="#top">&uarr; top</a>
+      </span>
+    </header>
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-Internal-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(api, data, initialized = false)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Create a new instance for given data. This method should not called by
+library consumers. Instead access entries via <a
+href="../API.html#method-i-item">ALD::API#item</a> or <a
+href="Collection.html#method-i-5B-5D">ALD::API::Collection#[]</a>.</p>
+<dl class="rdoc-list note-list"><dt>api
+<dd>
+<p>the <a href="../API.html">ALD::API</a> instance this item belongs to</p>
+</dd><dt>data
+<dd>
+<p>a Hash containing data concerning the item:</p>
+<dl class="rdoc-list note-list"><dt>id
+<dd>
+<p>the GUID of the item</p>
+</dd><dt>name
+<dd>
+<p>the name of the item</p>
+</dd><dt>version
+<dd>
+<p>the semver version of the item The above fields are mandatory. However, the
+hash may contain a lot more data about the item.</p>
+</dd></dl>
+</dd><dt>initialized
+<dd>
+<p>a Boolean indicating if data only contains the mandatory fields or
+<strong>all</strong> data on the item.</p>
+</dd></dl>
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="CollectionEntry.html#method-c-new">ALD::API::CollectionEntry.new</a>
+            </div>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">api</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">initialized</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">Item</span>.<span class="ruby-identifier">valid_data?</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">api</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">initialized</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="private-class-Internal-method-details" class="method-section">
+       <header>
+         <h3>Private Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-initialized_attributes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">initialized_attributes</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Override of CollectionEntry#initialized_attributes to enable automatic
+method definition, in this case #id, #name and #version.</p>
+
+<h3 id="method-c-initialized_attributes-label-Returns">Returns<span><a href="#method-c-initialized_attributes-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns an Array of attribute names (String)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="initialized_attributes-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item.rb, line 173</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">initialized_attributes</span>
+  <span class="ruby-node">%w[id name version]</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-requested_attributes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">requested_attributes</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Override of CollectionEntry#requested_attributes to enable automatic method
+definition.</p>
+
+<h3 id="method-c-requested_attributes-label-Returns">Returns<span><a href="#method-c-requested_attributes-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns an Array of attribute names (String)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="requested_attributes-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item.rb, line 181</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">requested_attributes</span>
+  <span class="ruby-node">%w[summary description uploaded reviewed downloads tags authors user ratings]</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-valid_data-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">valid_data?</span><span
+            class="method-args">(data)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Ensure a Hash contains all information necessary to be passed to #new.</p>
+<dl class="rdoc-list note-list"><dt>data
+<dd>
+<p>the Hash to check for mandatory fields</p>
+</dd></dl>
+
+<h3 id="method-c-valid_data-3F-label-Returns">Returns<span><a href="#method-c-valid_data-3F-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns true if the Hash is valid, false otherwise.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="valid_data-3F-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">valid_data?</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-identifier">data</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">initialized_attributes</span>.<span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">k</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="private-instance-Internal-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-request" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">request</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>If the item was initialized with only mandatory data, use the <a
+href="../API.html">API</a> to request all missing information.</p>
+
+<h3 id="method-i-request-label-Returns">Returns<span><a href="#method-i-request-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns nothing.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="request-source">
+            <pre><span class="ruby-comment"># File lib/ALD/item.rb, line 152</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">request</span>
+  <span class="ruby-ivar">@data</span> = <span class="ruby-ivar">@api</span>.<span class="ruby-identifier">request</span>(<span class="ruby-node">&quot;/items/#{id}&quot;</span>)
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;uploaded&#39;</span>] = <span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;uploaded&#39;</span>])
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;tags&#39;</span>].<span class="ruby-identifier">map!</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_sym</span>)
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;user&#39;</span>] = <span class="ruby-ivar">@api</span>.<span class="ruby-identifier">user</span>(<span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;user&#39;</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

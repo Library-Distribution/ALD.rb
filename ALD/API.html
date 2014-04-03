@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class ALD::API - RDoc Documentation</title>
+
+<link href="../fonts.css" rel="stylesheet">
+<link href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/search_index.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/searcher.js"></script>
+<script src="../js/darkfish.js"></script>
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    <div id="sections-section" class="nav-section">
+  <h3>Sections</h3>
+
+  <ul class="link-list" role="directory">
+    
+      <li><a href="#5Buntitled-5D"></a></li>
+    
+      <li><a href="#Public">Public</a></li>
+    
+      <li><a href="#Internal">Internal</a></li>
+    
+  </ul>
+</div>
+
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">Object
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-auth-3D">#auth=</a>
+    
+    <li ><a href="#method-i-auth_method">#auth_method</a>
+    
+    <li ><a href="#method-i-create_request">#create_request</a>
+    
+    <li ><a href="#method-i-item">#item</a>
+    
+    <li ><a href="#method-i-items">#items</a>
+    
+    <li ><a href="#method-i-normalize_id">#normalize_id</a>
+    
+    <li ><a href="#method-i-request">#request</a>
+    
+    <li ><a href="#method-i-request_with_auth">#request_with_auth</a>
+    
+    <li ><a href="#method-i-user">#user</a>
+    
+    <li ><a href="#method-i-users">#users</a>
+    
+    <li ><a href="#method-i-valid_auth-3F">#valid_auth?</a>
+    
+    <li ><a href="#method-i-version">#version</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ALD::API">
+  <h1 id="class-ALD::API" class="class">
+    class ALD::API
+  </h1>
+
+  <section class="description">
+    
+<p>Access the ALD <a href="API.html">API</a> programatically.</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+  
+  
+  <section id="Public" class="documentation-section">
+    
+    <header class="documentation-section-title">
+      <h2>
+        Public
+      </h2>
+      <span class="section-click-top">
+        <a href="#top">&uarr; top</a>
+      </span>
+    </header>
+    
+
+    
+
+    
+
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-auth" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">auth</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Get current authentication information Hash (see <a
+href="API.html#method-i-auth-3D">#auth=</a>)</p>
+        
+        </div>
+      </div>
+      
+    </section>
+    
+
+    
+     <section id="public-class-Public-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(root_url)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Create a new instance to access an ALD server.</p>
+<dl class="rdoc-list note-list"><dt>root_url
+<dd>
+<p>a String pointing to the root URL of the server&#39;s <a
+href="API.html">API</a>.</p>
+</dd></dl>
+
+<p>Example</p>
+
+<pre>api = ALD::API.new(&#39;http://api.my_ald_server.com/v1/&#39;)</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/ALD/api.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">root_url</span>)
+  <span class="ruby-ivar">@root_url</span> = <span class="ruby-constant">URI</span>(<span class="ruby-identifier">root_url</span>)
+  <span class="ruby-ivar">@item_store</span>, <span class="ruby-ivar">@user_store</span> = {}, {}
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-Public-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-auth-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">auth=</span><span
+            class="method-args">(auth)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Set authentication information for future requests.</p>
+<dl class="rdoc-list note-list"><dt>auth
+<dd>
+<p>a Hash containing the authentication information:</p>
+<dl class="rdoc-list note-list"><dt>:name
+<dd>
+<p>the user name to use</p>
+</dd><dt>:password
+<dd>
+<p>the plaintext password to use</p>
+</dd></dl>
+</dd></dl>
+
+<h3 id="method-i-auth-3D-label-Returns">Returns<span><a href="#method-i-auth-3D-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns the hash that was passed.</p>
+
+<p>Raises ArgumentError if the passed hash does not have the specified keys.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="auth-3D-source">
+            <pre><span class="ruby-comment"># File lib/ALD/api.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">auth=</span>(<span class="ruby-identifier">auth</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">valid_auth?</span>(<span class="ruby-identifier">auth</span>)
+  <span class="ruby-ivar">@auth</span> = <span class="ruby-identifier">auth</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-item" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">item</span><span
+            class="method-args">(*args)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Get an individual item. This method is roughly equivalent to calling <a
+href="API/Collection.html#method-i-5B-5D">ALD::API::Collection#[]</a> on <a
+href="API.html#method-i-items">#items</a>. Calling this method might
+trigger a HTTP request.</p>
+
+<h3 id="method-i-item-label-Examples">Examples<span><a href="#method-i-item-label-Examples">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">api</span>.<span class="ruby-identifier">item</span>(<span class="ruby-string">&#39;185d265f24654545aad3f88e8a383339&#39;</span>)
+<span class="ruby-identifier">api</span>.<span class="ruby-identifier">item</span>(<span class="ruby-string">&#39;MyApp&#39;</span>, <span class="ruby-string">&#39;0.9.5&#39;</span>)
+
+<span class="ruby-comment"># unlike ItemCollection#[], this also supports passing a Hash (and a Boolean):</span>
+<span class="ruby-identifier">api</span>.<span class="ruby-identifier">item</span>({<span class="ruby-string">&#39;id&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;185d265f24654545aad3f88e8a383339&#39;</span>,
+         <span class="ruby-string">&#39;name&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;MyApp&#39;</span>,
+         <span class="ruby-string">&#39;version&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;4.5.6&#39;</span>})
+<span class="ruby-comment"># However, this last form is only meant to be used internally and should</span>
+<span class="ruby-comment"># never be called by library consumers.</span>
+</pre>
+
+<h3 id="method-i-item-label-Returns">Returns<span><a href="#method-i-item-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns the <a href="API/Item.html">ALD::API::Item</a> instance
+representing the item, or nil if not found.</p>
+
+<p>Raises ArgumentError if the arguments are not of one of the supported
+forms.</p>
+
+<h3 id="method-i-item-label-Signature">Signature<span><a href="#method-i-item-label-Signature">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<pre>item(id)
+item(name, version)</pre>
+<dl class="rdoc-list note-list"><dt>id
+<dd>
+<p>the GUID String of the item to return</p>
+</dd><dt>name
+<dd>
+<p>a String containing the item&#39;s name</p>
+</dd><dt>version
+<dd>
+<p>a String containing the item&#39;s semver version</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="item-source">
+            <pre><span class="ruby-comment"># File lib/ALD/api.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">item</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Hash</span> <span class="ruby-comment"># used internally to avoid multiple Item instances</span>
+    <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>[<span class="ruby-string">&#39;id&#39;</span>] = <span class="ruby-identifier">normalize_id</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>[<span class="ruby-string">&#39;id&#39;</span>])
+    <span class="ruby-ivar">@item_store</span>[<span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>[<span class="ruby-string">&#39;id&#39;</span>]] <span class="ruby-operator">||=</span> <span class="ruby-constant">Item</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-comment"># GUID</span>
+    <span class="ruby-ivar">@item_store</span>[<span class="ruby-identifier">normalize_id</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>)] <span class="ruby-operator">||</span> <span class="ruby-identifier">items</span>[<span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>]
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span> <span class="ruby-comment"># name and version</span>
+    <span class="ruby-identifier">items</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-items" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">items</span><span
+            class="method-args">(conditions = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Get a collection of items from this server. This calls <a
+href="API/Conditioned.html#method-i-where">ALD::API::Conditioned#where</a>
+on the collection of all items. This method might trigger a HTTP request.</p>
+<dl class="rdoc-list note-list"><dt>conditions
+<dd>
+<p>a Hash of conditions the items should meet. Valid conditions are documented
+at <a
+href="API/Conditioned.html#method-i-where">ALD::API::Conditioned#where</a>.</p>
+</dd></dl>
+
+<p>Example</p>
+
+<pre class="ruby"><span class="ruby-identifier">api</span>.<span class="ruby-identifier">items</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">puts</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">name</span> }
+<span class="ruby-identifier">api</span>.<span class="ruby-identifier">items</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;MyApp&#39;</span>) <span class="ruby-comment"># equivalent to api.items.where(name: &#39;MyApp&#39;)</span>
+</pre>
+
+<h3 id="method-i-items-label-Returns">Returns<span><a href="#method-i-items-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns an <a href="API/ItemCollection.html">ALD::API::ItemCollection</a>
+containing the items.</p>
+
+<p>Raises ArgumentError if the specified conditions are invalid.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="items-source">
+            <pre><span class="ruby-comment"># File lib/ALD/api.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">items</span>(<span class="ruby-identifier">conditions</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@all_items</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ItemCollection</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+  <span class="ruby-ivar">@all_items</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">conditions</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-user" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">user</span><span
+            class="method-args">(*args)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Get an individual user. This method is roughly equivalent to calling <a
+href="API/Collection.html#method-i-5B-5D">ALD::API::Collection#[]</a> on <a
+href="API.html#method-i-users">#users</a>. Calling this method might
+trigger a HTTP request.</p>
+
+<h3 id="method-i-user-label-Examples">Examples<span><a href="#method-i-user-label-Examples">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">api</span>.<span class="ruby-identifier">user</span>(<span class="ruby-string">&#39;6a309ac8a4304f5cb1e6a2982f680ca5&#39;</span>)
+<span class="ruby-identifier">api</span>.<span class="ruby-identifier">user</span>(<span class="ruby-string">&#39;Bob&#39;</span>)
+
+<span class="ruby-comment"># As #item, this method also supports being passed a Hash (and a Boolean),</span>
+<span class="ruby-comment"># which should only be used internally.</span>
+</pre>
+
+<h3 id="method-i-user-label-Returns">Returns<span><a href="#method-i-user-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns the <a href="API/User.html">ALD::API::User</a> instance
+representing the user, or nil if not found.</p>
+
+<p>Raises ArgumentError if the arguments are not of one of the supported
+forms.</p>
+
+<h3 id="method-i-user-label-Signature">Signature<span><a href="#method-i-user-label-Signature">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<pre>user(id)
+user(name)</pre>
+<dl class="rdoc-list note-list"><dt>id
+<dd>
+<p>a 32-character GUID string containing the user&#39;s ID</p>
+</dd><dt>name
+<dd>
+<p>a String containing the user&#39;s name</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="user-source">
+            <pre><span class="ruby-comment"># File lib/ALD/api.rb, line 151</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">user</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Hash</span> <span class="ruby-comment"># used internally to avoid multiple User instances</span>
+    <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>[<span class="ruby-string">&#39;id&#39;</span>] = <span class="ruby-identifier">normalize_id</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>[<span class="ruby-string">&#39;id&#39;</span>])
+    <span class="ruby-ivar">@user_store</span>[<span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>[<span class="ruby-string">&#39;id&#39;</span>]] <span class="ruby-operator">||=</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+    <span class="ruby-ivar">@user_store</span>[<span class="ruby-identifier">normalize_id</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>)] <span class="ruby-operator">||</span> <span class="ruby-identifier">users</span>[<span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-users" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">users</span><span
+            class="method-args">(conditions = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Get a collection of users on this server. This calls <a
+href="API/Conditioned.html#method-i-where">ALD::API::Conditioned#where</a>
+on the collection of all users. This method might trigger a HTTP request.</p>
+<dl class="rdoc-list note-list"><dt>conditions
+<dd>
+<p>a Hash of conditions the users should meet. Valid conditions are documented
+at <a
+href="API/Conditioned.html#method-i-where">ALD::API::Conditioned#where</a>.</p>
+</dd></dl>
+
+<h3 id="method-i-users-label-Returns">Returns<span><a href="#method-i-users-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns an <a href="API/UserCollection.html">ALD::API::UserCollection</a>
+containing the users.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="users-source">
+            <pre><span class="ruby-comment"># File lib/ALD/api.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">users</span>(<span class="ruby-identifier">conditions</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@all_users</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">UserCollection</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+  <span class="ruby-ivar">@all_users</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">conditions</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-version" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">version</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Get the <a href="API.html">API</a> version supported by the server. This
+method triggers a HTTP request.</p>
+
+<h3 id="method-i-version-label-Returns">Returns<span><a href="#method-i-version-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns the semver version string of the <a href="API.html">API</a>.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="version-source">
+            <pre><span class="ruby-comment"># File lib/ALD/api.rb, line 81</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">version</span>
+  <span class="ruby-ivar">@version</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">request</span>(<span class="ruby-string">&#39;/version&#39;</span>)[<span class="ruby-string">&#39;version&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+
+  
+  
+  <section id="Internal" class="documentation-section">
+    
+    <header class="documentation-section-title">
+      <h2>
+        Internal
+      </h2>
+      <span class="section-click-top">
+        <a href="#top">&uarr; top</a>
+      </span>
+    </header>
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="DEFAULT_HEADERS">DEFAULT_HEADERS
+        
+        <dd><p>The default headers to be used in <a
+href="API.html#method-i-request">#request</a>.</p>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    
+     <section id="public-instance-Internal-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-normalize_id" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">normalize_id</span><span
+            class="method-args">(id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Given a GUID string, bring it into a standardized form. This is used
+internally to make comparing GUIDs easier.</p>
+<dl class="rdoc-list note-list"><dt>id
+<dd>
+<p>the GUID String to normalize</p>
+</dd></dl>
+
+<h3 id="method-i-normalize_id-label-Returns">Returns<span><a href="#method-i-normalize_id-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns the normalized GUID String.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="normalize_id-source">
+            <pre><span class="ruby-comment"># File lib/ALD/api.rb, line 168</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">normalize_id</span>(<span class="ruby-identifier">id</span>)
+  <span class="ruby-identifier">id</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/[^0-9A-F]/</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-request" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">request</span><span
+            class="method-args">(url, method = :get, headers = {}, body = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Make a raw request to the ALD server. This is used internally, and library
+consumers should only call it if they are familiar with the ALD <a
+href="API.html">API</a>.</p>
+<dl class="rdoc-list note-list"><dt>url
+<dd>
+<p>the URL String, relative to the root URL, to request against.</p>
+</dd><dt>method
+<dd>
+<p>a Symbol indicating the HTTP method to use. Supported: :get, :post</p>
+</dd><dt>headers
+<dd>
+<p>a Hash containing additional headers (for the defaults see
+::DEFAULT_HEADERS).</p>
+</dd><dt>body
+<dd>
+<p>If method is :post, a request body to use.</p>
+</dd></dl>
+
+<h3 id="method-i-request-label-Returns">Returns<span><a href="#method-i-request-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns The response body; as Hash / Array if the &#39;Content-type&#39;
+header indicates a JSON response; as raw String otherwise.</p>
+
+<p>Raises ArgumentError is method is not supported.</p>
+
+<p>Raises <a href="API/RequestError.html">API::RequestError</a> if the
+response code is not in (200…300).</p>
+          
+          
+
+          
+          <div class="method-source-code" id="request-source">
+            <pre><span class="ruby-comment"># File lib/ALD/api.rb, line 193</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">request</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">method</span> = <span class="ruby-value">:get</span>, <span class="ruby-identifier">headers</span> = {}, <span class="ruby-identifier">body</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">start</span>(<span class="ruby-ivar">@root_url</span>.<span class="ruby-identifier">host</span>, <span class="ruby-ivar">@root_url</span>.<span class="ruby-identifier">port</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">http</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">url</span> = <span class="ruby-ivar">@root_url</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">url</span>
+
+    <span class="ruby-identifier">request</span> = <span class="ruby-identifier">create_request</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">url</span>)
+    <span class="ruby-constant">DEFAULT_HEADERS</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">headers</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">request</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">v</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">response</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>)
+    <span class="ruby-identifier">response</span> = <span class="ruby-identifier">request_with_auth</span>(<span class="ruby-identifier">http</span>, <span class="ruby-identifier">request</span>, <span class="ruby-identifier">url</span>, <span class="ruby-identifier">response</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">code</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-value">401</span>
+
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">RequestError</span> <span class="ruby-keyword">unless</span> (<span class="ruby-value">200</span><span class="ruby-operator">...</span><span class="ruby-value">300</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">code</span>.<span class="ruby-identifier">to_i</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>[<span class="ruby-string">&#39;Content-type&#39;</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;application/json&#39;</span>)
+      <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="private-instance-Internal-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-auth_method" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">auth_method</span><span
+            class="method-args">(response)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Get the authentication method used by a server</p>
+<dl class="rdoc-list note-list"><dt>response
+<dd>
+<p>the Net::HTTPResponse to examine</p>
+</dd></dl>
+
+<h3 id="method-i-auth_method-label-Returns">Returns<span><a href="#method-i-auth_method-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns the used method as Symbol, e.g. :digest or :basic</p>
+          
+          
+
+          
+          <div class="method-source-code" id="auth_method-source">
+            <pre><span class="ruby-comment"># File lib/ALD/api.rb, line 272</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">auth_method</span>(<span class="ruby-identifier">response</span>)
+  <span class="ruby-identifier">response</span>[<span class="ruby-string">&#39;WWW-Authenticate&#39;</span>].<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39; &#39;</span>)[<span class="ruby-value">0</span>].<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">to_sym</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-create_request" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_request</span><span
+            class="method-args">(method, url)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Create a new Net::HTTPRequest for the given method.</p>
+<dl class="rdoc-list note-list"><dt>method
+<dd>
+<p>a Symbol indicating the HTTP verb (lowercase</p>
+</dd><dt>url
+<dd>
+<p>the URI to request</p>
+</dd></dl>
+
+<h3 id="method-i-create_request-label-Returns">Returns<span><a href="#method-i-create_request-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns a Net::HTTPRequest for the given method.</p>
+
+<p>Raises ArgumentError if the verb is not supported.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="create_request-source">
+            <pre><span class="ruby-comment"># File lib/ALD/api.rb, line 224</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_request</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">url</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">method</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:get</span>
+      <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">request_uri</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:post</span>
+      <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Post</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">request_uri</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-request_with_auth" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">request_with_auth</span><span
+            class="method-args">(http, request, url, failed_response)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Retry a request with authentication</p>
+<dl class="rdoc-list note-list"><dt>http
+<dd>
+<p>a Net::HTTP object to use for the request</p>
+</dd><dt>request
+<dd>
+<p>the Net::HTTPRequest to use</p>
+</dd><dt>url
+<dd>
+<p>the URI that is requested</p>
+</dd><dt>failed_response
+<dd>
+<p>the response that was given when requesting without auth</p>
+</dd></dl>
+
+<h3 id="method-i-request_with_auth-label-Returns">Returns<span><a href="#method-i-request_with_auth-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns a successful Net::HTTPResponse for the request.</p>
+
+<p>Raises <a href="API/NoAuthError.html">NoAuthError</a> if @auth is not set.</p>
+
+<p>Raises <a
+href="API/UnsupportedAuthMethodError.html">UnsupportedAuthMethodError</a>
+if the server uses a not supported auth method.</p>
+
+<p>Raises <a href="API/InvalidAuthError.html">InvalidAuthError</a> if the
+authenticated request yields a 401 response.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="request_with_auth-source">
+            <pre><span class="ruby-comment"># File lib/ALD/api.rb, line 250</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">request_with_auth</span>(<span class="ruby-identifier">http</span>, <span class="ruby-identifier">request</span>, <span class="ruby-identifier">url</span>, <span class="ruby-identifier">failed_response</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NoAuthError</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@auth</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">auth_method</span>(<span class="ruby-identifier">failed_response</span>)
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:basic</span>
+      <span class="ruby-identifier">request</span>.<span class="ruby-identifier">basic_auth</span>(<span class="ruby-ivar">@auth</span>[<span class="ruby-value">:name</span>], <span class="ruby-ivar">@auth</span>[<span class="ruby-value">:password</span>])
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:digest</span>
+      <span class="ruby-identifier">url</span>.<span class="ruby-identifier">user</span>, <span class="ruby-identifier">url</span>.<span class="ruby-identifier">password</span> = <span class="ruby-ivar">@auth</span>[<span class="ruby-value">:name</span>], <span class="ruby-ivar">@auth</span>[<span class="ruby-value">:password</span>]
+      <span class="ruby-identifier">request</span>.<span class="ruby-identifier">add_field</span> <span class="ruby-string">&#39;Authorization&#39;</span>, <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">DigestAuth</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">auth_header</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">failed_response</span>[<span class="ruby-string">&#39;WWW-Authenticate&#39;</span>], <span class="ruby-identifier">request</span>.<span class="ruby-identifier">method</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">UnsupportedAuthMethodError</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">InvalidAuthError</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">code</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-value">401</span>
+  <span class="ruby-identifier">response</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-valid_auth-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">valid_auth?</span><span
+            class="method-args">(auth)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Check if a Hash contains valid auth data</p>
+<dl class="rdoc-list note-list"><dt>auth
+<dd>
+<p>the Hash to check</p>
+</dd></dl>
+
+<h3 id="method-i-valid_auth-3F-label-Returns">Returns<span><a href="#method-i-valid_auth-3F-label-Returns">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Returns true, if the Hash contains the necessary keys, false otherwise.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="valid_auth-3F-source">
+            <pre><span class="ruby-comment"># File lib/ALD/api.rb, line 281</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">valid_auth?</span>(<span class="ruby-identifier">auth</span>)
+  <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-node">%w[name password]</span>.<span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_sym</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

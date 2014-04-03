@@ -1,7 +1,16 @@
-Sat, 22 Mar 2014 01:22:53 +0100
-lib/ALD.rb	Sat, 22 Mar 2014 00:40:07 +0100
-lib/ALD/definition.rb	Sat, 22 Mar 2014 01:12:20 +0100
-lib/ALD/definition_generator.rb	Thu, 20 Mar 2014 00:33:35 +0100
-lib/ALD/exceptions.rb	Thu, 20 Mar 2014 00:33:35 +0100
-lib/ALD/package.rb	Sat, 22 Mar 2014 01:18:55 +0100
-lib/ALD/package_generator.rb	Thu, 20 Mar 2014 00:33:35 +0100
+Thu, 03 Apr 2014 15:40:05 +0200
+lib/ALD.rb	Thu, 03 Apr 2014 15:36:41 +0200
+lib/ALD/api.rb	Thu, 03 Apr 2014 15:33:45 +0200
+lib/ALD/collection.rb	Thu, 03 Apr 2014 15:33:45 +0200
+lib/ALD/collection_entry.rb	Thu, 03 Apr 2014 15:33:45 +0200
+lib/ALD/conditioned.rb	Thu, 03 Apr 2014 15:33:45 +0200
+lib/ALD/definition.rb	Thu, 03 Apr 2014 15:33:45 +0200
+lib/ALD/definition_generator.rb	Sat, 22 Mar 2014 01:24:26 +0100
+lib/ALD/exceptions.rb	Thu, 03 Apr 2014 15:33:45 +0200
+lib/ALD/item.rb	Thu, 03 Apr 2014 15:33:45 +0200
+lib/ALD/item_collection.rb	Thu, 03 Apr 2014 15:33:45 +0200
+lib/ALD/local_filter.rb	Thu, 03 Apr 2014 15:33:45 +0200
+lib/ALD/package.rb	Thu, 03 Apr 2014 15:33:31 +0200
+lib/ALD/package_generator.rb	Thu, 03 Apr 2014 15:33:31 +0200
+lib/ALD/user.rb	Thu, 03 Apr 2014 15:33:45 +0200
+lib/ALD/user_collection.rb	Thu, 03 Apr 2014 15:33:45 +0200
