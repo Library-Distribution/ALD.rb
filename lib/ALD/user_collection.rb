@@ -87,7 +87,7 @@ module ALD
           range_query
         ].reduce({}, :merge)
 
-        url = "/items/#{data.empty? ? '' : '?'}#{URI.encode_www_form(data)}"
+        url = "/users/#{data.empty? ? '' : '?'}#{URI.encode_www_form(data)}"
         @data = @api.request(url).map do |hash|
           hash['id'] = @api.normalize_id(hash['id'])
           hash
